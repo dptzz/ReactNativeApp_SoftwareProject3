@@ -129,7 +129,7 @@ const Playground = ({ route }) => {
                         <Text style={styles.tryAgainButtonText}>Try Again</Text>
                     </TouchableOpacity>
                 </View>
-
+                
             )}
         </View>
     )
