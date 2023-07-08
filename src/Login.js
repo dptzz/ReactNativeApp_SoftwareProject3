@@ -35,7 +35,7 @@ const Login = () => {
                     onChangeText={(password) => setPassword(password)}
                     autoCapitalize='none'
                     autoCorrect={false}
-                    sercureTextEntry={true}
+                    secureTextEntry={true}
                 />
             </View>
             <TouchableOpacity
