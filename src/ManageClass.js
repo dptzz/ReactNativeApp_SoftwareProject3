@@ -11,8 +11,8 @@ const ManageClass = ({ navigation }) => {
 
   const getClasses = async () => {
     const db = firebase.firestore()
-    const subjectsRef = db.collection('class');
-    const snapshot = await subjectsRef.get();
+    const classref = db.collection('class');
+    const snapshot = await classref.get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
