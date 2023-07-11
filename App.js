@@ -12,20 +12,25 @@ import Dashboard from './src/Dashboard';
 import TeacherDashboard from './src/TeacherDashboard';
 import AdminDashboard from './src/AdminDashboard';
 import Loading from './src/Loading';
-import ManageClass from './src/mngclass/ManageClass';
+
 import ManageStudents from './src/mngstudent/ManageStudents';
-import ManageSubjects from './src/mngsubject/ManageSubjects';
+
 import ManageTeachers from './src/mngteacher/ManageTeachers';
 
 import Header from './component/Header';
+
+//Manage classes
+import ManageClass from './src/mngclass/ManageClass';
 import AddClass1 from './src/mngclass/add/AddClass1';
 import AddClass2 from './src/mngclass/add/AddClass2';
 import AddClass3 from './src/mngclass/add/AddClass3';
 import EditClass1 from './src/mngclass/edit/EditClass1';
 import EditClass2 from './src/mngclass/edit/EditClass2';
 import EditClass3 from './src/mngclass/edit/EditClass3';
-
-
+//Manage subjects
+import ManageSubjects from './src/mngsubject/ManageSubjects';
+import AddSubject from './src/mngsubject/add/AddSubject';
+import EditSubject from './src/mngsubject/edit/EditSubject';
 
 
 const Stack = createStackNavigator()
@@ -123,16 +128,55 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name='AdminDashboard' component={AdminDashboard} />
-          <Stack.Screen name='ManageClass' component={ManageClass} />
-          <Stack.Screen name='AddClass1' component={AddClass1} />
-          <Stack.Screen name='AddClass2' component={AddClass2} />
-          <Stack.Screen name='AddClass3' component={AddClass3} />
-          <Stack.Screen name='EditClass1' component={EditClass1} />
-          <Stack.Screen name='EditClass2' component={EditClass2} />
-          <Stack.Screen name='EditClass3' component={EditClass3} />
-          <Stack.Screen name='ManageStudents' component={ManageStudents} />
-          <Stack.Screen name='ManageTeachers' component={ManageTeachers} />
-          <Stack.Screen name='ManageSubjects' component={ManageSubjects} />
+
+          {/* Manage classes */}
+          <Stack.Group>
+            <Stack.Screen name='ManageClass' component={ManageClass} />
+            <Stack.Screen name='AddClass1' component={AddClass1} />
+            <Stack.Screen name='AddClass2' component={AddClass2} />
+            <Stack.Screen name='AddClass3' component={AddClass3} />
+            <Stack.Screen name='EditClass1' component={EditClass1} />
+            <Stack.Screen name='EditClass2' component={EditClass2} />
+            <Stack.Screen name='EditClass3' component={EditClass3} />
+          </Stack.Group>
+
+          {/* Manage subjects */}
+
+          <Stack.Group>
+            <Stack.Screen name='ManageSubjects' component={ManageSubjects} />
+            <Stack.Screen name='AddSubject' component={AddSubject} />
+            <Stack.Screen name='EditSubject' component={EditSubject} />
+          </Stack.Group>
+          {/* Manage chapter */}
+          <Stack.Group>
+
+          </Stack.Group>
+
+          {/* Manage questions */}
+          <Stack.Group>
+
+          </Stack.Group>
+
+          {/* Manage teachers */}
+          <Stack.Group>
+            <Stack.Screen name='ManageTeachers' component={ManageTeachers} />
+          </Stack.Group>
+
+          {/* Manage students */}
+          <Stack.Group>
+            <Stack.Screen name='ManageStudents' component={ManageStudents} />
+          </Stack.Group>
+
+          {/* Set Role */}
+          <Stack.Group>
+
+          </Stack.Group>
+
+
+
+
+
+
         </Stack.Navigator>
       </NavigationContainer>
     )

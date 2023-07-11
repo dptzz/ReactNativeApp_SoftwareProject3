@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, FlatList
 import React, { useState, useEffect } from 'react'
 import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
-const pushAction = (subjectName) => StackActions.push('EditClass1',
+const pushAction = (subjectName) => StackActions.push('EditSubject',
  {name: subjectName})
  
 
@@ -86,7 +86,7 @@ const ManageSubject = ({ navigation }) => {
       </View>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('AddClass1')}
+        onPress={() => navigation.navigate('AddSubject')}
         style={styles.touchableOpacityStyle}>
         <Image
           //We are making FAB using TouchableOpacity with an image

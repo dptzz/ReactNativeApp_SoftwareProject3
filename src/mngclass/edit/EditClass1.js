@@ -21,8 +21,8 @@ const EditClass1 = ({ navigation, route }) => {
 
   const getTeacher = async () => {
     const db = firebase.firestore()
-    const questionsRef = db.collection('users');
-    const snapshot = await questionsRef.where('role', '==', 1).get();
+    const teacherRef = db.collection('users');
+    const snapshot = await teacherRef.where('role', '==', 1).get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
@@ -32,8 +32,8 @@ const EditClass1 = ({ navigation, route }) => {
   }
   const getClass = async () => {
     const db = firebase.firestore()
-    const questionsRef = db.collection('class');
-    const snapshot = await questionsRef.where('name', '==', name).get();
+    const classRef = db.collection('class');
+    const snapshot = await classRef.where('name', '==', name).get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
