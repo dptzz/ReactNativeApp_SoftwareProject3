@@ -1,37 +1,39 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { firebase } from '../FirebaseConfig'
+import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
-const pushAction = (className) => StackActions.push('EditClass1',
- {name: className})
+const pushAction = (subjectName) => StackActions.push('EditClass1',
+ {name: subjectName})
  
 
-const ManageClass = ({ navigation }) => {
-  const [listClass, setlistClass] = useState([])
+const ManageSubject = ({ navigation }) => {
+  const [listSubjects, setListSubjects] = useState([])
 
-  const getClasses = async () => {
+
+  // Get Subjects from firebase
+  const getSubjects = async () => {
     const db = firebase.firestore()
-    const classref = db.collection('class');
-    const snapshot = await classref.get();
+    const subjectsRef = db.collection('subjects');
+    const snapshot = await subjectsRef.get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
     }
-    const allClass = snapshot.docs.map(doc => doc.data());
+    const allSubject = snapshot.docs.map(doc => doc.data());
     
-    setlistClass(allClass)
+    setListSubjects(allSubject)
   }
 
-
-  const deleteClass = (className) => {
+  // Delete Subjects
+  const deleteClass = (subjectName) => {
     const db = firebase.firestore()
-    let docID = db.collection('class').where('name', '==', className).get()
+    let docID = db.collection('subjects').where('name', '==', subjectName).get()
       .then((snapshot) => {
         snapshot.forEach((doc) =>{
           docID = doc.id
-          db.collection("class").doc(docID).delete().then(() => {
+          db.collection("subjects").doc(docID).delete().then(() => {
             console.log("Document successfully deleted!"+docID);
-            alert("Class successfully deleted: "+className);
+            alert("Subject successfully deleted: "+subjectName);
           }).catch((error) => {
             console.error("Error removing document: ", error);
           });
@@ -41,19 +43,19 @@ const ManageClass = ({ navigation }) => {
     });
   }
   useEffect(() => {
-    getClasses();
+    getSubjects();
   }, [])
   useEffect(() => {
-    getClasses();
+    getSubjects();
     
   })
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Classes</Text>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Subjects</Text>
         <View style={{ flex: 1, borderWidth: 1 }}>
           <FlatList
-            data={listClass}
+            data={listSubjects}
             renderItem={({ item, index }) => (
               <View
                 style={[
@@ -64,7 +66,7 @@ const ManageClass = ({ navigation }) => {
                   style={styles.itemTouchableOpacicty}
                   onPress={() => navigation.dispatch(pushAction(item.name))}
                   >
-                  <Image source={require('../assets/icon/edit.png')}
+                  <Image source={require('../../assets/icon/edit.png')}
                     style={styles.itemTouchableOpacictyIcon} />
 
                 </TouchableOpacity>
@@ -72,7 +74,7 @@ const ManageClass = ({ navigation }) => {
                   style={styles.itemTouchableOpacicty}
                   onPress={() => deleteClass(item.name)}
                 >
-                  <Image source={require('../assets/icon/bin.png')}
+                  <Image source={require('../../assets/icon/bin.png')}
                     style={styles.itemTouchableOpacictyIcon} />
 
                 </TouchableOpacity>
@@ -103,7 +105,7 @@ const ManageClass = ({ navigation }) => {
   )
 }
 
-export default ManageClass
+export default ManageSubject
 
 const styles = StyleSheet.create({
   container: {

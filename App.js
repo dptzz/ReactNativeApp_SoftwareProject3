@@ -12,17 +12,21 @@ import Dashboard from './src/Dashboard';
 import TeacherDashboard from './src/TeacherDashboard';
 import AdminDashboard from './src/AdminDashboard';
 import Loading from './src/Loading';
-import ManageClass from './src/ManageClass';
-import ManageStudents from './src/ManageStudents';
-import ManageSubjects from './src/ManageSubjects';
-import ManageTeachers from './src/ManageTeachers';
-import AddClass2 from './src/AddClass2';
-import AddClass3 from './src/AddClass3';
-import EditClass1 from './src/EditClass1';
-import EditClass2 from './src/EditClass2';
-import EditClass3 from './src/EditClass3';
+import ManageClass from './src/mngclass/ManageClass';
+import ManageStudents from './src/mngstudent/ManageStudents';
+import ManageSubjects from './src/mngsubject/ManageSubjects';
+import ManageTeachers from './src/mngteacher/ManageTeachers';
+
 import Header from './component/Header';
-import AddClass1 from './src/AddClass1';
+import AddClass1 from './src/mngclass/add/AddClass1';
+import AddClass2 from './src/mngclass/add/AddClass2';
+import AddClass3 from './src/mngclass/add/AddClass3';
+import EditClass1 from './src/mngclass/edit/EditClass1';
+import EditClass2 from './src/mngclass/edit/EditClass2';
+import EditClass3 from './src/mngclass/edit/EditClass3';
+
+
+
 
 const Stack = createStackNavigator()
 
@@ -36,15 +40,15 @@ const App = () => {
     if (initializing) setInitializing(false);
     if (user) {
       firebase.firestore().collection('users')
-      .doc(firebase.auth().currentUser.uid).get()
-      .then((snapshot) => {
-        if (snapshot.exists) {
-          setUserRole(snapshot.data())
-        }
-        else {
-          console.log('User not found')
-        }
-      })
+        .doc(firebase.auth().currentUser.uid).get()
+        .then((snapshot) => {
+          if (snapshot.exists) {
+            setUserRole(snapshot.data())
+          }
+          else {
+            console.log('User not found')
+          }
+        })
     }
   }
 
@@ -54,7 +58,7 @@ const App = () => {
   }, []);
 
   if (initializing) return null;
-  
+
   if (!user) {
     return (
       <NavigationContainer>
@@ -94,7 +98,7 @@ const App = () => {
 
     )
   }
-  if (userRole.role === 0){
+  if (userRole.role === 0) {
     return (
       <NavigationContainer>
         <Stack.Navigator>
@@ -104,7 +108,7 @@ const App = () => {
       </NavigationContainer>
     )
   }
-  if (userRole.role === 1){
+  if (userRole.role === 1) {
     return (
       <NavigationContainer>
         <Stack.Navigator>
@@ -114,7 +118,7 @@ const App = () => {
       </NavigationContainer>
     )
   }
-  if (userRole.role === 2){
+  if (userRole.role === 2) {
     return (
       <NavigationContainer>
         <Stack.Navigator>

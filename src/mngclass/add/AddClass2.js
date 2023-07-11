@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { firebase } from '../FirebaseConfig'
+import { firebase } from '../../../FirebaseConfig'
 import { BottomSheetSlideOutSpec } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs'
 
 
