@@ -31,6 +31,10 @@ import EditClass3 from './src/mngclass/edit/EditClass3';
 import ManageSubjects from './src/mngsubject/ManageSubjects';
 import AddSubject from './src/mngsubject/add/AddSubject';
 import EditSubject from './src/mngsubject/edit/EditSubject';
+//Manage chapters
+import ManageChapter from './src/mngchapter/ManageChapter';
+import AddChapter from './src/mngchapter/add/AddChapter';
+import EditChapter from './src/mngchapter/edit/EditChapter';
 
 
 const Stack = createStackNavigator()
@@ -146,8 +150,12 @@ const App = () => {
             <Stack.Screen name='ManageSubjects' component={ManageSubjects} />
             <Stack.Screen name='AddSubject' component={AddSubject} />
             <Stack.Screen name='EditSubject' component={EditSubject} />
+            {/* Manage chapter */}
+            <Stack.Screen name='ManageChapter' component={ManageChapter} />
+            <Stack.Screen name='AddChapter' component={AddChapter} />
+            <Stack.Screen name='EditChapter' component={EditChapter} />
           </Stack.Group>
-          {/* Manage chapter */}
+          
           <Stack.Group>
 
           </Stack.Group>

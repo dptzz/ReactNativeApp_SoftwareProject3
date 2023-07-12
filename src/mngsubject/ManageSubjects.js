@@ -57,10 +57,12 @@ const ManageSubject = ({ navigation }) => {
           <FlatList
             data={listSubjects}
             renderItem={({ item, index }) => (
-              <View
+              <TouchableOpacity
                 style={[
                   styles.item,
-                ]}>
+                ]}
+                onPress={() =>navigation.navigate('ManageChapter', {subject: item.name}) }
+                >
                 <Text style={styles.itemname}>{item.name}</Text>
                 <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
@@ -78,7 +80,7 @@ const ManageSubject = ({ navigation }) => {
                     style={styles.itemTouchableOpacictyIcon} />
 
                 </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
             )}
           />
         </View>
