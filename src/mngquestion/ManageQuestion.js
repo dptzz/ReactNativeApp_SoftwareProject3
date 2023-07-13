@@ -2,41 +2,42 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, FlatList
 import React, { useState, useEffect } from 'react'
 import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
-const pushAction = (chapterName, subjectName) => StackActions.push('EditChapter',
-    { name: chapterName, subject: subjectName })
+const pushAction = (question, chapterName, subjectName) => StackActions.push('EditQuestion',
+    {question: question, chapter: chapterName, subject: subjectName })
 
 
-const ManageChapter = ({ navigation, route }) => {
-    const [listChapters, setListChapters] = useState([])
+const ManageQuestion = ({ navigation, route }) => {
+    const [listQuestions, setListQuestions] = useState([])
 
-    const { subject } = route.params
+    const { subject, chapter } = route.params
 
     // Get Chapters from firebase
-    const getChapter = async () => {
+    const getQuestion = async () => {
         const db = firebase.firestore()
-        const subjectsRef = db.collection('chapters');
+        const subjectsRef = db.collection('questions');
 
-        const snapshot = await subjectsRef.where('subject', '==', subject).get();
+        const snapshot = await subjectsRef.where('subject', '==', subject).where('chapter', '==', chapter).get();
         if (snapshot.empty) {
             console.log('No matching documents...');
             return;
         }
-        const allChapter = snapshot.docs.map(doc => doc.data());
+        const allQuestion = snapshot.docs.map(doc => doc.data());
         //console.log(allChapter.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)))
         // Sort by name
-        setListChapters(allChapter.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)))
+        setListQuestions(allQuestion)
     }
 
-    // Delete Chapters
-    const deleteClass = (chapterName, subjectName) => {
+    // Delete Question
+    const deleteQuestion = (question, chapterName, subjectName) => {
         const db = firebase.firestore()
-        let docID = db.collection('chapters').where('name', '==', chapterName).where('subject', '==', subjectName).get()
+        let docID = db.collection('questions').where('subject', '==', subjectName).where('chapter', '==', chapterName).where('question', '==', question).get()
             .then((snapshot) => {
                 snapshot.forEach((doc) => {
                     docID = doc.id
-                    db.collection("chapters").doc(docID).delete().then(() => {
+                    console.log(docID)
+                    db.collection("questions").doc(docID).delete().then(() => {
                         console.log("Document successfully deleted!" + docID);
-                        alert("Chapter successfully deleted: " + chapterName);
+                        alert("Question successfully deleted: " + question);
                     }).catch((error) => {
                         console.error("Error removing document: ", error);
                     });
@@ -46,29 +47,28 @@ const ManageChapter = ({ navigation, route }) => {
             });
     }
     useEffect(() => {
-        getChapter();
+        getQuestion();
     }, [])
     useEffect(() => {
-        getChapter();
+        getQuestion();
 
-    },[listChapters]);
+    },[listQuestions]);
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, margin: 10 }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Chapters</Text>
+                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Questions</Text>
                 <View style={{ flex: 1, borderWidth: 1 }}>
                     <FlatList
-                        data={listChapters}
+                        data={listQuestions}
                         renderItem={({ item, index }) => (
-                            <TouchableOpacity
-                            onPress={() => navigation.navigate('ManageQuestion',{subject: subject, chapter: item.name})}
+                            <View
                                 style={[
                                     styles.item,
                                 ]}>
-                                <Text style={styles.itemname}>{item.name}</Text>
+                                <Text style={styles.itemname} numberOfLines={1} ellipsizeMode='tail'>{item.question}</Text>
                                 <TouchableOpacity
                                     style={styles.itemTouchableOpacicty}
-                                    onPress={() => navigation.dispatch(pushAction(item.name, subject))}
+                                    onPress={() => navigation.dispatch(pushAction(item.question, chapter, subject))}
                                 >
                                     <Image source={require('../../assets/icon/edit.png')}
                                         style={styles.itemTouchableOpacictyIcon} />
@@ -76,13 +76,13 @@ const ManageChapter = ({ navigation, route }) => {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.itemTouchableOpacicty}
-                                    onPress={() => deleteClass(item.name, subject)}
+                                    onPress={() => deleteQuestion(item.question, chapter, subject)}
                                 >
                                     <Image source={require('../../assets/icon/bin.png')}
                                         style={styles.itemTouchableOpacictyIcon} />
 
                                 </TouchableOpacity>
-                            </TouchableOpacity>
+                            </View>
                         )}
                     />
                 </View>
@@ -90,7 +90,7 @@ const ManageChapter = ({ navigation, route }) => {
             </View>
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => navigation.navigate('AddChapter', { subject: subject })}
+                onPress={() => navigation.navigate('AddQuestion1', { subject: subject, chapter: chapter })}
                 style={styles.touchableOpacityStyle}>
                 <Image
                     //We are making FAB using TouchableOpacity with an image
@@ -109,7 +109,7 @@ const ManageChapter = ({ navigation, route }) => {
     )
 }
 
-export default ManageChapter
+export default ManageQuestion
 
 const styles = StyleSheet.create({
     container: {
@@ -147,11 +147,12 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         flexDirection: 'row',
-
+        
     },
     itemname: {
         flexGrow: 1,
-        fontSize: 24
+        fontSize: 24,
+        flex: 1
     },
     itemTouchableOpacicty: {
         flexShrink: 0,

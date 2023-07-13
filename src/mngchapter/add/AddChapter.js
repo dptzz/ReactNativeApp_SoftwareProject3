@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { StackActions } from '@react-navigation/native'
 import { firebase } from '../../../FirebaseConfig'
 
-const AddClass1 = ({ navigation, route }) => {
+
+const AddChapter = ({ navigation, route }) => {
     const [chapterName, setChapterName] = useState('')
     const [selecetedOptions, setSelecetOptions] = useState()
     const [listSubject, setListSubject] = useState([])
@@ -135,7 +136,7 @@ const AddClass1 = ({ navigation, route }) => {
 }
 
 
-export default AddClass1
+export default AddChapter
 
 const styles = StyleSheet.create({
     item: {

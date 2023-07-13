@@ -35,6 +35,11 @@ import EditSubject from './src/mngsubject/edit/EditSubject';
 import ManageChapter from './src/mngchapter/ManageChapter';
 import AddChapter from './src/mngchapter/add/AddChapter';
 import EditChapter from './src/mngchapter/edit/EditChapter';
+//Manage questions
+import ManageQuestion from './src/mngquestion/ManageQuestion';
+import AddQuestion from './src/mngquestion/add/AddQuestion';
+import EditQuestion from './src/mngquestion/edit/EditQuestion';
+
 
 
 const Stack = createStackNavigator()
@@ -150,17 +155,25 @@ const App = () => {
             <Stack.Screen name='ManageSubjects' component={ManageSubjects} />
             <Stack.Screen name='AddSubject' component={AddSubject} />
             <Stack.Screen name='EditSubject' component={EditSubject} />
+            
             {/* Manage chapter */}
             <Stack.Screen name='ManageChapter' component={ManageChapter} />
             <Stack.Screen name='AddChapter' component={AddChapter} />
             <Stack.Screen name='EditChapter' component={EditChapter} />
+
+            {/* Manage questions */}
+            <Stack.Screen name='ManageQuestion' component={ManageQuestion} />
+            <Stack.Screen name='AddQuestion' component={AddQuestion} />
+
+            <Stack.Screen name='EditQuestion' component={EditQuestion} />
+
           </Stack.Group>
           
           <Stack.Group>
 
           </Stack.Group>
 
-          {/* Manage questions */}
+          
           <Stack.Group>
 
           </Stack.Group>

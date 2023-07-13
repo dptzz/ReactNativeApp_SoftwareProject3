@@ -44,16 +44,6 @@ const EditClass1 = ({ navigation, route }) => {
     setSelecetOptions(listTeacher.findIndex(obj => {
       return obj.email === thisClass[0].teacher
     }))
-    
-    // listTeacher.forEach(teacher => {
-      
-    //   if(teacher.email === thisClass[0].teacher) {
-    //     //setSelecetOptions(teacher)
-    //     console.log(listTeacher)
-    //     console.log(thisClass[0].teacher)
-    //     
-    //   }
-    // });
   }
   const checkNameExists = async (className) => {
     const db = firebase.firestore()
