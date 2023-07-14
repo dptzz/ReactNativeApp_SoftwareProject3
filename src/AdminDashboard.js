@@ -22,7 +22,7 @@ const AdminDashboard = () => {
   return (
     <View style={styles.container}>
       <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 20, fontWeight: 'bold' }}>Welcome back {name.firstName}!</Text>
-      <View style={styles.categoriesContainer}>
+      {/* <View style={styles.categoriesContainer}>
         <TouchableOpacity
           style={styles.category}
           onPress={() => navigation.navigate('ManageClass')}>
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
           onPress={() => navigation.navigate('ManageSubjects')}>
           <Text style={styles.categoryTitle}>Manage Subjects</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   )
 }

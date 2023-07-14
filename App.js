@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { firebase } from './FirebaseConfig';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+//import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 import QuizApp from './src/QuizApp';
 import Playground from './src/Playground';
 import Login from './src/Login';
@@ -12,6 +14,7 @@ import Dashboard from './src/Dashboard';
 import TeacherDashboard from './src/TeacherDashboard';
 import AdminDashboard from './src/AdminDashboard';
 import Loading from './src/Loading';
+import UsersTab from './src/UsersTab';
 
 import ManageStudents from './src/mngstudent/ManageStudents';
 
@@ -43,6 +46,56 @@ import EditQuestion from './src/mngquestion/edit/EditQuestion';
 
 
 const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator();
+
+const AdminHome = () => {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false, tabBarStyle: { height: 60 }, tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' } }} >
+      <Tab.Screen name="AdminDashboard" component={AdminDashboard}
+        options={{
+          title: 'Dashboard',
+          tabBarIcon: ({ color, size }) =>
+            <Icon name="home" color={color} size={size} />
+
+          ,
+
+        }}
+
+      />
+      <Tab.Screen name="ManageClass" component={ManageClass}
+        options={{
+          title: 'Classes',
+          tabBarIcon: ({ color, size }) =>
+            <Icon name="users" color={color} size={size} />
+
+          ,
+
+        }}
+      />
+      <Tab.Screen name="ManageSubjects" component={ManageSubjects}
+        options={{
+          title: 'Subjects',
+
+          tabBarIcon: ({ color, size }) =>
+            <Icon name="book" color={color} size={size} />
+
+          ,
+
+        }} />
+        <Tab.Screen name="UsersTab" component={UsersTab}
+        options={{
+          title: 'Users',
+
+          tabBarIcon: ({ color, size }) =>
+            <Icon name="user-edit" color={color} size={size} />
+
+          ,
+
+        }} />
+    </Tab.Navigator>
+  )
+
+}
 
 const App = () => {
   const [initializing, setInitializing] = useState();
@@ -136,12 +189,12 @@ const App = () => {
     return (
       <NavigationContainer>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <Stack.Navigator>
-            <Stack.Screen name='AdminDashboard' component={AdminDashboard} />
+          <Stack.Navigator >
+            <Stack.Screen name='AdminHome' component={AdminHome} options={{ headerShown: false }} />
 
             {/* Manage classes */}
             <Stack.Group>
-              <Stack.Screen name='ManageClass' component={ManageClass} />
+              {/* <Stack.Screen name='ManageClass' component={ManageClass} /> */}
               <Stack.Screen name='AddClass1' component={AddClass1} />
               <Stack.Screen name='AddClass2' component={AddClass2} />
               <Stack.Screen name='AddClass3' component={AddClass3} />
@@ -153,7 +206,7 @@ const App = () => {
             {/* Manage subjects */}
 
             <Stack.Group>
-              <Stack.Screen name='ManageSubjects' component={ManageSubjects} />
+              {/* <Stack.Screen name='ManageSubjects' component={ManageSubjects} /> */}
               <Stack.Screen name='AddSubject' component={AddSubject} />
               <Stack.Screen name='EditSubject' component={EditSubject} />
 
