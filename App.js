@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -135,70 +135,72 @@ const App = () => {
   if (userRole.role === 2) {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='AdminDashboard' component={AdminDashboard} />
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <Stack.Navigator>
+            <Stack.Screen name='AdminDashboard' component={AdminDashboard} />
 
-          {/* Manage classes */}
-          <Stack.Group>
-            <Stack.Screen name='ManageClass' component={ManageClass} />
-            <Stack.Screen name='AddClass1' component={AddClass1} />
-            <Stack.Screen name='AddClass2' component={AddClass2} />
-            <Stack.Screen name='AddClass3' component={AddClass3} />
-            <Stack.Screen name='EditClass1' component={EditClass1} />
-            <Stack.Screen name='EditClass2' component={EditClass2} />
-            <Stack.Screen name='EditClass3' component={EditClass3} />
-          </Stack.Group>
+            {/* Manage classes */}
+            <Stack.Group>
+              <Stack.Screen name='ManageClass' component={ManageClass} />
+              <Stack.Screen name='AddClass1' component={AddClass1} />
+              <Stack.Screen name='AddClass2' component={AddClass2} />
+              <Stack.Screen name='AddClass3' component={AddClass3} />
+              <Stack.Screen name='EditClass1' component={EditClass1} />
+              <Stack.Screen name='EditClass2' component={EditClass2} />
+              <Stack.Screen name='EditClass3' component={EditClass3} />
+            </Stack.Group>
 
-          {/* Manage subjects */}
+            {/* Manage subjects */}
 
-          <Stack.Group>
-            <Stack.Screen name='ManageSubjects' component={ManageSubjects} />
-            <Stack.Screen name='AddSubject' component={AddSubject} />
-            <Stack.Screen name='EditSubject' component={EditSubject} />
-            
-            {/* Manage chapter */}
-            <Stack.Screen name='ManageChapter' component={ManageChapter} />
-            <Stack.Screen name='AddChapter' component={AddChapter} />
-            <Stack.Screen name='EditChapter' component={EditChapter} />
+            <Stack.Group>
+              <Stack.Screen name='ManageSubjects' component={ManageSubjects} />
+              <Stack.Screen name='AddSubject' component={AddSubject} />
+              <Stack.Screen name='EditSubject' component={EditSubject} />
 
-            {/* Manage questions */}
-            <Stack.Screen name='ManageQuestion' component={ManageQuestion} />
-            <Stack.Screen name='AddQuestion' component={AddQuestion} />
+              {/* Manage chapter */}
+              <Stack.Screen name='ManageChapter' component={ManageChapter} />
+              <Stack.Screen name='AddChapter' component={AddChapter} />
+              <Stack.Screen name='EditChapter' component={EditChapter} />
 
-            <Stack.Screen name='EditQuestion' component={EditQuestion} />
+              {/* Manage questions */}
+              <Stack.Screen name='ManageQuestion' component={ManageQuestion} />
+              <Stack.Screen name='AddQuestion' component={AddQuestion} />
 
-          </Stack.Group>
-          
-          <Stack.Group>
+              <Stack.Screen name='EditQuestion' component={EditQuestion} />
 
-          </Stack.Group>
+            </Stack.Group>
 
-          
-          <Stack.Group>
+            <Stack.Group>
 
-          </Stack.Group>
-
-          {/* Manage teachers */}
-          <Stack.Group>
-            <Stack.Screen name='ManageTeachers' component={ManageTeachers} />
-          </Stack.Group>
-
-          {/* Manage students */}
-          <Stack.Group>
-            <Stack.Screen name='ManageStudents' component={ManageStudents} />
-          </Stack.Group>
-
-          {/* Set Role */}
-          <Stack.Group>
-
-          </Stack.Group>
+            </Stack.Group>
 
 
+            <Stack.Group>
 
+            </Stack.Group>
+
+            {/* Manage teachers */}
+            <Stack.Group>
+              <Stack.Screen name='ManageTeachers' component={ManageTeachers} />
+            </Stack.Group>
+
+            {/* Manage students */}
+            <Stack.Group>
+              <Stack.Screen name='ManageStudents' component={ManageStudents} />
+            </Stack.Group>
+
+            {/* Set Role */}
+            <Stack.Group>
+
+            </Stack.Group>
 
 
 
-        </Stack.Navigator>
+
+
+
+          </Stack.Navigator>
+        </TouchableWithoutFeedback>
       </NavigationContainer>
     )
   }

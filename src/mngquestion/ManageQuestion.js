@@ -61,7 +61,8 @@ const ManageQuestion = ({ navigation, route }) => {
                     <FlatList
                         data={listQuestions}
                         renderItem={({ item, index }) => (
-                            <View
+                            <TouchableOpacity
+                                onPress={() => navigation.dispatch(pushAction(item.question, chapter, subject))}
                                 style={[
                                     styles.item,
                                 ]}>
@@ -82,7 +83,7 @@ const ManageQuestion = ({ navigation, route }) => {
                                         style={styles.itemTouchableOpacictyIcon} />
 
                                 </TouchableOpacity>
-                            </View>
+                            </TouchableOpacity>
                         )}
                     />
                 </View>

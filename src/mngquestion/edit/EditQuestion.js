@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, FlatList, ScrollView, TouchableWithoutFeedback } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { StackActions } from '@react-navigation/native'
 import { firebase } from '../../../FirebaseConfig'
@@ -69,7 +69,8 @@ const EditQuestion = ({ navigation, route }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, margin: 10 }}>
+      
+      <ScrollView style={{ flex: 1, margin: 10 }}>
         {/* Title section */}
         <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Question title</Text>
         <TextInput
@@ -77,6 +78,11 @@ const EditQuestion = ({ navigation, route }) => {
           style={{ borderWidth: 1, padding: 10, fontSize: 24, marginBottom: 10 }}
           onChangeText={setQuestionTitle}
           value={questionTitle}
+          keyboardType="default"
+          returnKeyType="done"
+          multiline={true}
+          blurOnSubmit={true}
+          
         />
 
         {/* Answers section */}
@@ -194,7 +200,7 @@ const EditQuestion = ({ navigation, route }) => {
         </View>
 
 
-      </View>
+      </ScrollView>
       <View>
         <TouchableOpacity
           disabled={
