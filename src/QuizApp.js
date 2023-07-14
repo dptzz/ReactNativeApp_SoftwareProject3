@@ -1,10 +1,28 @@
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { firebase } from '../FirebaseConfig'
+
 const QuizApp = () => {
+  const [name, setName] = useState('')
+
+  useEffect(() => {
+    firebase.firestore().collection('users')
+      .doc(firebase.auth().currentUser.uid).get()
+      .then((snapshot) => {
+        if (snapshot.exists) {
+          setName(snapshot.data())
+        }
+        else {
+          console.log('User not found')
+        }
+      })
+  }, [])
+
   const navigation = useNavigation()
   return (
     <View style={styles.container}>
+      <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 20, fontWeight: 'bold' }}>Welcome back {name.firstName}!</Text>
       <View style={styles.categoriesContainer}>
         <TouchableOpacity
           style={styles.category}
@@ -42,6 +60,14 @@ const QuizApp = () => {
           <Text style={styles.categoryTitle}>Movies</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.categoriesContainer}>
+        <TouchableOpacity
+          style={styles.signOutButton}
+          onPress={() => firebase.auth().signOut()}>
+          <Text style={styles.signOutButtonText}>Sign Out</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   )
 }
@@ -72,6 +98,23 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   categoryTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#000000'
+  },
+  signOutButton: {
+    width: 100,
+    height: 50,
+    margin: 10,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000000',
+    elevation: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  signOutButtonText: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',

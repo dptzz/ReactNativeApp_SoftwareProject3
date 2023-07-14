@@ -20,7 +20,7 @@ const Playground = ({ route }) => {
         setShowResults(false);
         const db = firebase.firestore()
         const questionsRef = db.collection('questions');
-        const snapshot = await questionsRef.where('category', '==', category).get();
+        const snapshot = await questionsRef.where('subject', '==', 'Anh Văn 12').where('chapter', '==', 'Chương 1').get();
         if (snapshot.empty) {
             console.log('No matching documents...');
             return;
@@ -129,7 +129,7 @@ const Playground = ({ route }) => {
                         <Text style={styles.tryAgainButtonText}>Try Again</Text>
                     </TouchableOpacity>
                 </View>
-
+                
             )}
         </View>
     )
