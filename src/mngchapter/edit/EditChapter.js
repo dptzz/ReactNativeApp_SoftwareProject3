@@ -24,7 +24,7 @@ const EditChapter = ({ navigation, route }) => {
         let docId = db.collection('chapters').where('subject', '==', subject).get()
             .then((snapshot) => {
                 snapshot.forEach((doc) => {
-                    
+
                     if (doc.data().name === cname) {
                         console.log(doc.data().name)
                         docId = doc.id;
@@ -129,7 +129,7 @@ const EditChapter = ({ navigation, route }) => {
                         if (isChapterExists || chapterName === name) {
                             handleSubmit(chapterName, subject, name)
                             navigation.dispatch(popAction)
-                            alert('Chapter ' + name + ' of ' + subject + ' has been updated to '+chapterName+' of '+subject);
+                            alert('Chapter ' + name + ' of ' + subject + ' has been updated to ' + chapterName + ' of ' + subject);
                         } else {
 
                             alert(`There is already a chapter named ${chapterName} in ${subject}`)

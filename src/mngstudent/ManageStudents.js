@@ -2,8 +2,9 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, FlatList
 import React, { useState, useEffect } from 'react'
 import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
-const pushAction = (className) => StackActions.push('EditClass1',
- {name: className})
+
+const pushAction = (email) => StackActions.push('EditStudent',
+ {email: email})
  
 
 const ManageStudents = ({ navigation }) => {
@@ -68,14 +69,14 @@ const ManageStudents = ({ navigation }) => {
                     style={styles.itemTouchableOpacictyIcon} />
 
                 </TouchableOpacity>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
                   onPress={() => deleteStudent(item.email)}
                 >
                   <Image source={require('../../assets/icon/bin.png')}
                     style={styles.itemTouchableOpacictyIcon} />
 
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             )}
           />

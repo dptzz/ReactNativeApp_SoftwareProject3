@@ -16,7 +16,6 @@ import AdminDashboard from './src/AdminDashboard';
 import Loading from './src/Loading';
 import UsersTab from './src/UsersTab';
 
-import ManageStudents from './src/mngstudent/ManageStudents';
 
 import ManageTeachers from './src/mngteacher/ManageTeachers';
 
@@ -42,7 +41,9 @@ import EditChapter from './src/mngchapter/edit/EditChapter';
 import ManageQuestion from './src/mngquestion/ManageQuestion';
 import AddQuestion from './src/mngquestion/add/AddQuestion';
 import EditQuestion from './src/mngquestion/edit/EditQuestion';
-
+//Manage Students
+import ManageStudents from './src/mngstudent/ManageStudents';
+import EditStudent from './src/mngstudent/edit/EditStudent';
 
 
 const Stack = createStackNavigator()
@@ -223,15 +224,6 @@ const App = () => {
 
             </Stack.Group>
 
-            <Stack.Group>
-
-            </Stack.Group>
-
-
-            <Stack.Group>
-
-            </Stack.Group>
-
             {/* Manage teachers */}
             <Stack.Group>
               <Stack.Screen name='ManageTeachers' component={ManageTeachers} />
@@ -240,6 +232,7 @@ const App = () => {
             {/* Manage students */}
             <Stack.Group>
               <Stack.Screen name='ManageStudents' component={ManageStudents} />
+              <Stack.Screen name='EditStudent' component={EditStudent} />
             </Stack.Group>
 
             {/* Set Role */}
