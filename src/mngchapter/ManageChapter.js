@@ -28,7 +28,7 @@ const ManageChapter = ({ navigation, route }) => {
     }
 
     // Delete Chapters
-    const deleteClass = (chapterName, subjectName) => {
+    const deleteChapter = (chapterName, subjectName) => {
         const db = firebase.firestore()
         let docID = db.collection('chapters').where('name', '==', chapterName).where('subject', '==', subjectName).get()
             .then((snapshot) => {
@@ -44,6 +44,20 @@ const ManageChapter = ({ navigation, route }) => {
             }).catch((error) => {
                 console.log("Error getting documents: ", error);
             });
+        let questionID = db.collection('questions').where('subject', '==', subjectName).where('chapter','==',chapterName).get()
+            .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    questionID = doc.id
+                    db.collection("questions").doc(questionID).delete().then(() => {
+                        console.log("Document successfully deleted!" + questionID);
+
+                    }).catch((error) => {
+                        console.error("Error removing document: ", error);
+                    });
+                })
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
     }
     useEffect(() => {
         getChapter();
@@ -51,7 +65,7 @@ const ManageChapter = ({ navigation, route }) => {
     useEffect(() => {
         getChapter();
 
-    },[listChapters]);
+    }, [listChapters]);
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, margin: 10 }}>
@@ -61,7 +75,7 @@ const ManageChapter = ({ navigation, route }) => {
                         data={listChapters}
                         renderItem={({ item, index }) => (
                             <TouchableOpacity
-                            onPress={() => navigation.navigate('ManageQuestion',{subject: subject, chapter: item.name})}
+                                onPress={() => navigation.navigate('ManageQuestion', { subject: subject, chapter: item.name })}
                                 style={[
                                     styles.item,
                                 ]}>
@@ -76,7 +90,7 @@ const ManageChapter = ({ navigation, route }) => {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.itemTouchableOpacicty}
-                                    onPress={() => deleteClass(item.name, subject)}
+                                    onPress={() => deleteChapter(item.name, subject)}
                                 >
                                     <Image source={require('../../assets/icon/bin.png')}
                                         style={styles.itemTouchableOpacictyIcon} />

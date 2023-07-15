@@ -11,8 +11,8 @@ const ManageStudents = ({ navigation }) => {
 
   const getStudents = async () => {
     const db = firebase.firestore()
-    const classref = db.collection('students');
-    const snapshot = await classref.get();
+    const studentRef = db.collection('users');
+    const snapshot = await studentRef.where('role','==',0).get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
@@ -23,15 +23,15 @@ const ManageStudents = ({ navigation }) => {
   }
 
 
-  const deleteClass = (className) => {
+  const deleteStudent = (studentName) => {
     const db = firebase.firestore()
-    let docID = db.collection('class').where('name', '==', className).get()
+    let docID = db.collection('class').where('name', '==', studentName).get()
       .then((snapshot) => {
         snapshot.forEach((doc) =>{
           docID = doc.id
           db.collection("class").doc(docID).delete().then(() => {
             console.log("Document successfully deleted!"+docID);
-            alert("Class successfully deleted: "+className);
+            alert("Class successfully deleted: "+studentName);
           }).catch((error) => {
             console.error("Error removing document: ", error);
           });
@@ -59,10 +59,10 @@ const ManageStudents = ({ navigation }) => {
                 style={[
                   styles.item,
                 ]}>
-                <Text style={styles.itemname}>{item.name}</Text>
+                <Text style={styles.itemname}>{item.email}</Text>
                 <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
-                  onPress={() => navigation.dispatch(pushAction(item.name))}
+                  onPress={() => navigation.dispatch(pushAction(item.email))}
                   >
                   <Image source={require('../../assets/icon/edit.png')}
                     style={styles.itemTouchableOpacictyIcon} />
@@ -70,7 +70,7 @@ const ManageStudents = ({ navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
-                  onPress={() => deleteClass(item.name)}
+                  onPress={() => deleteStudent(item.email)}
                 >
                   <Image source={require('../../assets/icon/bin.png')}
                     style={styles.itemTouchableOpacictyIcon} />

@@ -25,15 +25,42 @@ const ManageSubject = ({ navigation }) => {
   }
 
   // Delete Subjects
-  const deleteClass = (subjectName) => {
+  const deleteSubject = (subjectName) => {
     const db = firebase.firestore()
-    let docID = db.collection('subjects').where('name', '==', subjectName).get()
+    let subjectID = db.collection('subjects').where('name', '==', subjectName).get()
       .then((snapshot) => {
         snapshot.forEach((doc) =>{
-          docID = doc.id
-          db.collection("subjects").doc(docID).delete().then(() => {
-            console.log("Document successfully deleted!"+docID);
+          subjectID = doc.id
+          db.collection("subjects").doc(subjectID).delete().then(() => {
+            console.log("Document successfully deleted!"+subjectID);
             alert("Subject successfully deleted: "+subjectName);
+          }).catch((error) => {
+            console.error("Error removing document: ", error);
+          });
+        })
+      }).catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+    let chapterID = db.collection('chapters').where('subject', '==', subjectName).get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) =>{
+          chapterID = doc.id
+          db.collection("chapters").doc(chapterID).delete().then(() => {
+            console.log("Document successfully deleted!"+chapterID);
+          }).catch((error) => {
+            console.error("Error removing document: ", error);
+          });
+        })
+      }).catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+    let questionID = db.collection('questions').where('subject', '==', subjectName).get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) =>{
+          questionID = doc.id
+          db.collection("questions").doc(questionID).delete().then(() => {
+            console.log("Document successfully deleted!"+questionID);
+            
           }).catch((error) => {
             console.error("Error removing document: ", error);
           });
@@ -74,7 +101,7 @@ const ManageSubject = ({ navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
-                  onPress={() => deleteClass(item.name)}
+                  onPress={() => deleteSubject(item.name)}
                 >
                   <Image source={require('../../assets/icon/bin.png')}
                     style={styles.itemTouchableOpacictyIcon} />
