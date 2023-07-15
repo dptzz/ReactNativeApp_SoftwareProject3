@@ -32,7 +32,7 @@ const AddClass2 = ({ navigation, route }) => {
     const getStudents = async () => {
         const db = firebase.firestore()
         const questionsRef = db.collection('users');
-        const snapshot = await questionsRef.where('role', '==', 0).get();
+        const snapshot = await questionsRef.where('class', '==', "").where('role', '==', 0).get();
         if (snapshot.empty) {
             console.log('No matching documents...');
             return;
@@ -42,7 +42,7 @@ const AddClass2 = ({ navigation, route }) => {
     }
     useEffect(() => {
         getStudents();
-        console.log(selectedStudents)
+        
     }, [])
     return (
         <View style={{ flex: 1 }}>

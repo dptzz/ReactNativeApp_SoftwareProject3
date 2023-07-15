@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
 const pushAction = (className) => StackActions.push('EditClass1',
- {name: className})
- 
+  { name: className })
+
 
 const ManageClass = ({ navigation }) => {
   const [listClass, setlistClass] = useState([])
+  const [thisStudents, setthisStudents] = useState([])
 
   const getClasses = async () => {
     const db = firebase.firestore()
@@ -18,39 +19,64 @@ const ManageClass = ({ navigation }) => {
       return;
     }
     const allClass = snapshot.docs.map(doc => doc.data());
-    
+
     setlistClass(allClass)
   }
 
 
-  const deleteClass = (className) => {
+  const deleteClass = async (className) => {
     const db = firebase.firestore()
+    const classref = db.collection('class');
+    let snapshot = await classref.where('name', '==', className).get()
+    if (snapshot.empty) {
+      return;
+    }
+    const thisClass = snapshot.docs.map(doc => doc.data());
+    let thisStudents = thisClass[0].students
+    //Remove Students References
+    for (let i = 0; i < thisStudents.length; i++) {
+      let studentId = db.collection('users').where('role','==',0).where('email','==',thisStudents[i]).get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          studentId = doc.id;
+          db.collection('users').doc(studentId).update({
+            class : "",
+          });
+        })
+      })
+    }
+    //Remove Class
     let docID = db.collection('class').where('name', '==', className).get()
       .then((snapshot) => {
-        snapshot.forEach((doc) =>{
+        snapshot.forEach((doc) => {
           docID = doc.id
           db.collection("class").doc(docID).delete().then(() => {
-            console.log("Document successfully deleted!"+docID);
-            alert("Class successfully deleted: "+className);
+            console.log("Document successfully deleted!" + docID);
+            alert("Class successfully deleted: " + className);
           }).catch((error) => {
             console.error("Error removing document: ", error);
           });
         })
       }).catch((error) => {
         console.log("Error getting documents: ", error);
-    });
+      });
+    //console.log(thisStudents)
+    
+
+
+
   }
   useEffect(() => {
     getClasses();
   }, [])
   useEffect(() => {
     getClasses();
-    
+
   })
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Classes</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Classes</Text>
         <View style={{ flex: 1, borderWidth: 1 }}>
           <FlatList
             data={listClass}
@@ -63,7 +89,7 @@ const ManageClass = ({ navigation }) => {
                 <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
                   onPress={() => navigation.dispatch(pushAction(item.name))}
-                  >
+                >
                   <Image source={require('../../assets/icon/edit.png')}
                     style={styles.itemTouchableOpacictyIcon} />
 

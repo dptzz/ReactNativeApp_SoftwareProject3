@@ -28,7 +28,7 @@ const EditClass2 = ({ navigation, route }) => {
   const getStudents = async () => {
     const db = firebase.firestore()
     const questionsRef = db.collection('users');
-    const snapshot = await questionsRef.where('role', '==', 0).get();
+    const snapshot = await questionsRef.where('class','in' ,['',cclassName]).where('role', '==', 0).get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
@@ -45,36 +45,37 @@ const EditClass2 = ({ navigation, route }) => {
       return;
     }
     const thisStudents = snapshot.docs.map(doc => doc.data());
-    
+
     setselectedStudents(thisStudents[0].students);
-    
+
   }
 
- 
+
+  
   useEffect(() => {
     // getStudents();
     // console.log(selectedStudents)
     getClass();
     getStudents();
-    
-    
+
+
   }, [])
   useEffect(() => {
     setSelecetOptions(selectedStudents);
-  },[selectedStudents.length]); //
+  }, [selectedStudents.length]); //
   useEffect(() => {
-    
+
     //
     // console.log(selectedStudents);
     //console.log(selecetedOptions);
-    
+
     // console.log(Object.values(listStudent)) //10
     // console.log(selectedStudents) //2
   })
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Students</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Students</Text>
         <View style={{ flex: 1, borderWidth: 1 }}>
           <FlatList
 
@@ -89,9 +90,9 @@ const EditClass2 = ({ navigation, route }) => {
                   onPress={() => {
                     if (selecetedOptions.includes(item.email)) {
                       setSelecetOptions(selecetedOptions.filter(value => value !== item.email))
-                  } else {
-                    setSelecetOptions([ ...new Set([...selecetedOptions, item.email])] )
-                  }
+                    } else {
+                      setSelecetOptions([...new Set([...selecetedOptions, item.email])])
+                    }
                   }}
                 >
                   <Text style={styles.itemname}>{item.firstName} {item.lastName}</Text>
@@ -110,8 +111,8 @@ const EditClass2 = ({ navigation, route }) => {
           ]}
           disabled={!(selecetedOptions.length > 0)}
           onPress={() => {
-           
-            navigation.navigate('EditClass3', { cclassName: `${cclassName}`,uclassName: `${uclassName}`, teacherName: `${teacherName}`, students: selecetedOptions })
+
+            navigation.navigate('EditClass3', { cclassName: `${cclassName}`, uclassName: `${uclassName}`, teacherName: `${teacherName}`, students: selecetedOptions })
             // console.log(selecetedOptions);
           }}
         >
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1
   },
-  itemname:{
+  itemname: {
     fontSize: 24,
   },
   selectedOptions: {

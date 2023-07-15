@@ -8,9 +8,9 @@ const EditClass3 = ({ navigation, route }) => {
   const [selecetedOptions, setSelecetOptions] = useState([])
   const [listSubject, setlistSubject] = useState([])
   const [selectedSubjects, setselectedSubjects] = useState([])
-
+  const [thisStudents, setThisStudents] = useState([])
   const { uclassName, cclassName, teacherName, students } = route.params
-  const [ classID, setClassID] = useState()
+  const [classID, setClassID] = useState()
   const popAction = StackActions.pop(3);
 
 
@@ -45,22 +45,84 @@ const EditClass3 = ({ navigation, route }) => {
 
   }
 
-  const handleSubmit = (name, students, subjects, teacher) => {
+  const getThisClass = async () => {
+    const db = firebase.firestore()
+    const classRef = db.collection('class')
+    const getClass = await classRef.where('name', '==', cclassName).get()
+    if (getClass.empty) {
+      console.log('No matching documents...');
+      return;
+    }
+    const thisClass = getClass.docs.map(doc => doc.data());
+    setThisStudents(thisClass[0].students)
+  }
+
+  const handleSubmit = (name, nstudents, subjects, teacher) => {
     const db = firebase.firestore()
     let docId = db.collection('class').where('name', '==', cclassName).get()
       .then((snapshot) => {
-        snapshot.forEach((doc) =>{
+        snapshot.forEach((doc) => {
           docId = doc.id;
           db.collection('class').doc(docId).set({
             name: name,
-            students: students,
+            students: nstudents,
             subjects: subjects,
             teacher: teacher,
           })
-          .catch((error) => {console.log(error.message)})
+            .catch((error) => { console.log(error.message) })
         })
       })
       .catch((err) => { console.log(err.message) })
+
+    // for (let i = 0; i < nstudents.length; i++) {
+    //   
+    // }
+    // UPDATE STUDENT CLASS: CLASS_NAME
+    const studentRef = db.collection('users')
+    let add = []
+
+    for (let i = 0; i < nstudents.length; i++) {
+      if (!thisStudents.includes(nstudents[i])) {
+        add.push(nstudents[i])
+      }
+    }
+
+    for (let i = 0; i < add.length; i++) {
+      let docID = studentRef.where('email', '==', add[i]).get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            docID = doc.id
+            db.collection('users').doc(docID).update({
+
+              class: name,
+            })
+          })
+        })
+    }
+
+    let remove = []
+
+    for (let i = 0; i < thisStudents.length; i++) {
+      if (!nstudents.includes(thisStudents[i])) {
+        remove.push(thisStudents[i])
+      }
+    }
+   
+    for (let i = 0; i < remove.length; i++) {
+      let docID = studentRef.where('email', '==', remove[i]).get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            docID = doc.id
+            db.collection('users').doc(docID).update({
+
+              class: "",
+            })
+          })
+        })
+    }
+    console.log('ADD: '+add)
+    console.log('Remove: '+remove)
+
     console.log('done')
   }
 
@@ -78,7 +140,7 @@ const EditClass3 = ({ navigation, route }) => {
   useEffect(() => {
     getSelectedSubject()
     getSubjects();
-    
+    getThisClass()
   }, [])
   useEffect(() => {
     setSelecetOptions(selectedSubjects);
@@ -87,7 +149,7 @@ const EditClass3 = ({ navigation, route }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Subjects</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Subjects</Text>
         <View style={{ flex: 1, borderWidth: 1 }}>
           <FlatList
             data={listSubject}

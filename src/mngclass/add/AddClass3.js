@@ -44,6 +44,22 @@ const AddClass3 = ({ navigation, route }) => {
                 teacher,
             })
             .catch((err) => {alert(err.message)})
+        const db = firebase.firestore()
+        const studentRef = db.collection('users')
+        
+        for (let i = 0; i < students.length; i++) {
+            let docID = studentRef.where('email', '==', students[i]).get()
+                .then((snapshot) => {
+                    snapshot.forEach((doc) => {
+                        docID = doc.id
+                        db.collection('users').doc(docID).update({
+                            
+                            class: name,
+                        })
+                    })
+                })
+        }
+         
         console.log('done')
     }
 

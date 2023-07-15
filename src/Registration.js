@@ -31,6 +31,7 @@ const Registration = () => {
                                 firstName,
                                 lastName,
                                 email,
+                                class: "",
                                 role,
                             })
                             .catch((error) => {
@@ -43,12 +44,6 @@ const Registration = () => {
             })
     }
     
-    const handleRoleSelect =() =>{
-        setSelecetOptions({
-            ...selecetedOptions,
-            [questionIndex]: option,
-        });
-    }
 
 
     return (
