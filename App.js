@@ -17,7 +17,6 @@ import Loading from './src/Loading';
 import UsersTab from './src/UsersTab';
 
 
-import ManageTeachers from './src/mngteacher/ManageTeachers';
 
 import Header from './component/Header';
 
@@ -44,7 +43,9 @@ import EditQuestion from './src/mngquestion/edit/EditQuestion';
 //Manage Students
 import ManageStudents from './src/mngstudent/ManageStudents';
 import EditStudent from './src/mngstudent/edit/EditStudent';
-
+//Manage Teachers
+import ManageTeachers from './src/mngteacher/ManageTeachers';
+import EditTeacher from './src/mngteacher/edit/EditTeacher';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -227,6 +228,7 @@ const App = () => {
             {/* Manage teachers */}
             <Stack.Group>
               <Stack.Screen name='ManageTeachers' component={ManageTeachers} />
+              <Stack.Screen name='EditTeacher' component={EditTeacher} />
             </Stack.Group>
 
             {/* Manage students */}
