@@ -98,7 +98,7 @@ const ManageQuestion = ({ navigation, route }) => {
             </View>
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => navigation.navigate('AddQuestion1', { subject: subject, chapter: chapter })}
+                onPress={() => navigation.navigate('AddQuestion', { subject: subject, chapter: chapter })}
                 style={styles.touchableOpacityStyle}>
                 <Image
                     //We are making FAB using TouchableOpacity with an image

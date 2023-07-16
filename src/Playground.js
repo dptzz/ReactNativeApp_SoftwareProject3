@@ -10,7 +10,7 @@ const Playground = ({ route }) => {
     const [score, setScore] = useState(0);
     const [showResults, setShowResults] = useState(false);
 
-    const { category } = route.params
+    const { subject } = route.params
 
     useEffect(() => {
         getQuestions()
@@ -20,14 +20,14 @@ const Playground = ({ route }) => {
         setShowResults(false);
         const db = firebase.firestore()
         const questionsRef = db.collection('questions');
-        const snapshot = await questionsRef.where('subject', '==', 'Anh Văn 12').where('chapter', '==', 'Chương 1').get();
+        const snapshot = await questionsRef.where('subject', '==', subject).get();
         if (snapshot.empty) {
             console.log('No matching documents...');
             return;
         }
         const allQuestions = snapshot.docs.map(doc => doc.data());
         const shuffleQuestions = allQuestions.sort(() => 0.5 - Math.random())
-        setQuestions(shuffleQuestions.slice(0, 10));
+        setQuestions(shuffleQuestions.slice(0, 15));
     };
 
     const handleOptionSelect = (questionIndex, option) => {
@@ -63,8 +63,9 @@ const Playground = ({ route }) => {
                             style={[
                                 styles.option,
                                 selecetedOptions[index] === 1 && styles.selecetedOptions,
-                                showResults && item.correctOption === 1 && styles.correctOption,
                                 showResults && selecetedOptions[index] === 1 && selecetedOptions !== item.correctOption && styles.wrongOption,
+                                showResults && item.correctOption === 1 && styles.correctOption,
+                                
                             ]}
                             onPress={() => handleOptionSelect(index, 1)}
                             disabled={showResults}>
@@ -75,8 +76,9 @@ const Playground = ({ route }) => {
                             style={[
                                 styles.option,
                                 selecetedOptions[index] === 2 && styles.selecetedOptions,
-                                showResults && item.correctOption === 2 && styles.correctOption,
                                 showResults && selecetedOptions[index] === 2 && selecetedOptions !== item.correctOption && styles.wrongOption,
+                                showResults && item.correctOption === 2 && styles.correctOption,
+                                
                             ]}
                             onPress={() => handleOptionSelect(index, 2)}
                             disabled={showResults}>
@@ -87,8 +89,9 @@ const Playground = ({ route }) => {
                             style={[
                                 styles.option,
                                 selecetedOptions[index] === 3 && styles.selecetedOptions,
+                                showResults && selecetedOptions[index] === 3 && selecetedOptions !== item.correctOption && styles.wrongOption ,
                                 showResults && item.correctOption === 3 && styles.correctOption,
-                                showResults && selecetedOptions[index] === 3 && selecetedOptions !== item.correctOption && styles.wrongOption,
+                                
                             ]}
                             onPress={() => handleOptionSelect(index, 3)}
                             disabled={showResults}>
@@ -99,8 +102,9 @@ const Playground = ({ route }) => {
                             style={[
                                 styles.option,
                                 selecetedOptions[index] === 4 && styles.selecetedOptions,
+                                showResults && selecetedOptions[index] === 4 && selecetedOptions !== item.correctOption && styles.wrongOption ,
                                 showResults && item.correctOption === 4 && styles.correctOption,
-                                showResults && selecetedOptions[index] === 4 && selecetedOptions !== item.correctOption && styles.wrongOption,
+                                
                             ]}
                             onPress={() => handleOptionSelect(index, 4)}
                             disabled={showResults}>
