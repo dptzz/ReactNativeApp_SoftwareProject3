@@ -63,9 +63,15 @@ const ManageChapter = ({ navigation, route }) => {
         getChapter();
     }, [])
     useEffect(() => {
-        getChapter();
-
-    }, [listChapters]);
+        const db = firebase.firestore()
+        const chapterRef = db.collection('chapters').where('subject', '==', subject);
+        const unsubscribe = chapterRef.onSnapshot((snapshot) => {
+            setListChapters(snapshot.docs.map(doc => doc.data()));
+        })
+        return () => {
+            unsubscribe();
+        }
+    }, []);
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, margin: 10 }}>

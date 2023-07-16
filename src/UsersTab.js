@@ -15,7 +15,7 @@ const UsersTab = ({ navigation }) => {
 
             </TouchableOpacity>
             <Text style={{ borderTopWidth: 1, fontSize: 0 }} />
-            <TouchableOpacity style={styles.item} onPress={()=> navigation.navigate('ManageTeachers') }>
+            <TouchableOpacity style={styles.item} onPress={()=> navigation.navigate('ManageRole') }>
                 <Text style={styles.itemname}>Set Role</Text>
 
             </TouchableOpacity>

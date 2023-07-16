@@ -24,30 +24,20 @@ const ManageStudents = ({ navigation }) => {
   }
 
 
-  const deleteStudent = (studentName) => {
-    const db = firebase.firestore()
-    let docID = db.collection('class').where('name', '==', studentName).get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) =>{
-          docID = doc.id
-          db.collection("class").doc(docID).delete().then(() => {
-            console.log("Document successfully deleted!"+docID);
-            alert("Class successfully deleted: "+studentName);
-          }).catch((error) => {
-            console.error("Error removing document: ", error);
-          });
-        })
-      }).catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
-  }
+
   useEffect(() => {
     getStudents();
   }, [])
   useEffect(() => {
-    getStudents();
-    
-  })
+    const db = firebase.firestore()
+    const studentRef = db.collection('users').where('role', '==',0);
+    const unsubscribe =  studentRef.onSnapshot((snapshot) => {
+      setlistStudents(snapshot.docs.map(doc => doc.data()));
+    })
+    return () => {
+      unsubscribe();
+    }
+  }, [])
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>

@@ -46,6 +46,9 @@ import EditStudent from './src/mngstudent/edit/EditStudent';
 //Manage Teachers
 import ManageTeachers from './src/mngteacher/ManageTeachers';
 import EditTeacher from './src/mngteacher/edit/EditTeacher';
+//Manage roles
+import ManageRole from './src/mngrole/ManageRole';
+import SetRole from './src/mngrole/setRole';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -237,8 +240,10 @@ const App = () => {
               <Stack.Screen name='EditStudent' component={EditStudent} />
             </Stack.Group>
 
-            {/* Set Role */}
+            {/* Manage Role */}
             <Stack.Group>
+            <Stack.Screen name='ManageRole' component={ManageRole} />
+            <Stack.Screen name='SetRole' component={SetRole} />
 
             </Stack.Group>
 

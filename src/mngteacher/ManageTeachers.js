@@ -8,46 +8,36 @@ const pushAction = (email) => StackActions.push('EditTeacher',
  
 
 const ManageTeachers = ({ navigation }) => {
-  const [listStudents, setlistStudents] = useState([])
+  const [listStudents, setListTeachers] = useState([])
 
-  const getStudents = async () => {
+  const getTeacher = async () => {
     const db = firebase.firestore()
-    const studentRef = db.collection('users');
-    const snapshot = await studentRef.where('role','==',1).get();
+    const teacherRef = db.collection('users');
+    const snapshot = await teacherRef.where('role','==',1).get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
     }
-    const allStudent = snapshot.docs.map(doc => doc.data());
+    const allTeacher = snapshot.docs.map(doc => doc.data());
     
-    setlistStudents(allStudent)
+    setListTeachers(allTeacher)
   }
 
 
-  const deleteStudent = (studentName) => {
-    const db = firebase.firestore()
-    let docID = db.collection('class').where('name', '==', studentName).get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) =>{
-          docID = doc.id
-          db.collection("class").doc(docID).delete().then(() => {
-            console.log("Document successfully deleted!"+docID);
-            alert("Class successfully deleted: "+studentName);
-          }).catch((error) => {
-            console.error("Error removing document: ", error);
-          });
-        })
-      }).catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
-  }
+
   useEffect(() => {
-    getStudents();
+    getTeacher();
   }, [])
   useEffect(() => {
-    getStudents();
-    
-  })
+    const db = firebase.firestore()
+    const teacherRef = db.collection('users').where('role', '==',1);
+    const unsubscribe =  teacherRef.onSnapshot((snapshot) => {
+      setListTeachers(snapshot.docs.map(doc => doc.data()));
+    })
+    return () => {
+      unsubscribe();
+    }
+  }, [])
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>

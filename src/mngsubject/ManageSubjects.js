@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
 const pushAction = (subjectName) => StackActions.push('EditSubject',
- {name: subjectName})
- 
+  { name: subjectName })
+
 
 const ManageSubject = ({ navigation }) => {
   const [listSubjects, setListSubjects] = useState([])
@@ -20,7 +20,7 @@ const ManageSubject = ({ navigation }) => {
       return;
     }
     const allSubject = snapshot.docs.map(doc => doc.data());
-    
+
     setListSubjects(allSubject)
   }
 
@@ -29,57 +29,63 @@ const ManageSubject = ({ navigation }) => {
     const db = firebase.firestore()
     let subjectID = db.collection('subjects').where('name', '==', subjectName).get()
       .then((snapshot) => {
-        snapshot.forEach((doc) =>{
+        snapshot.forEach((doc) => {
           subjectID = doc.id
           db.collection("subjects").doc(subjectID).delete().then(() => {
-            console.log("Document successfully deleted!"+subjectID);
-            alert("Subject successfully deleted: "+subjectName);
+            console.log("Document successfully deleted!" + subjectID);
+            alert("Subject successfully deleted: " + subjectName);
           }).catch((error) => {
             console.error("Error removing document: ", error);
           });
         })
       }).catch((error) => {
         console.log("Error getting documents: ", error);
-    });
+      });
     let chapterID = db.collection('chapters').where('subject', '==', subjectName).get()
       .then((snapshot) => {
-        snapshot.forEach((doc) =>{
+        snapshot.forEach((doc) => {
           chapterID = doc.id
           db.collection("chapters").doc(chapterID).delete().then(() => {
-            console.log("Document successfully deleted!"+chapterID);
+            console.log("Document successfully deleted!" + chapterID);
           }).catch((error) => {
             console.error("Error removing document: ", error);
           });
         })
       }).catch((error) => {
         console.log("Error getting documents: ", error);
-    });
+      });
     let questionID = db.collection('questions').where('subject', '==', subjectName).get()
       .then((snapshot) => {
-        snapshot.forEach((doc) =>{
+        snapshot.forEach((doc) => {
           questionID = doc.id
           db.collection("questions").doc(questionID).delete().then(() => {
-            console.log("Document successfully deleted!"+questionID);
-            
+            console.log("Document successfully deleted!" + questionID);
+
           }).catch((error) => {
             console.error("Error removing document: ", error);
           });
         })
       }).catch((error) => {
         console.log("Error getting documents: ", error);
-    });
+      });
   }
   useEffect(() => {
     getSubjects();
   }, [])
   useEffect(() => {
-    getSubjects();
-    
-  })
+    const db = firebase.firestore()
+    const subjectRef = db.collection('subjects');
+    const unsubscribe = subjectRef.onSnapshot((snapshot) => {
+      setListSubjects(snapshot.docs.map(doc => doc.data()));
+    })
+    return () => {
+      unsubscribe();
+    }
+  }, [])
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Subjects</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Subjects</Text>
         <View style={{ flex: 1, borderWidth: 1 }}>
           <FlatList
             data={listSubjects}
@@ -88,13 +94,13 @@ const ManageSubject = ({ navigation }) => {
                 style={[
                   styles.item,
                 ]}
-                onPress={() =>navigation.navigate('ManageChapter', {subject: item.name}) }
-                >
+                onPress={() => navigation.navigate('ManageChapter', { subject: item.name })}
+              >
                 <Text style={styles.itemname}>{item.name}</Text>
                 <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
                   onPress={() => navigation.dispatch(pushAction(item.name))}
-                  >
+                >
                   <Image source={require('../../assets/icon/edit.png')}
                     style={styles.itemTouchableOpacictyIcon} />
 

@@ -35,15 +35,15 @@ const ManageClass = ({ navigation }) => {
     let thisStudents = thisClass[0].students
     //Remove Students References
     for (let i = 0; i < thisStudents.length; i++) {
-      let studentId = db.collection('users').where('role','==',0).where('email','==',thisStudents[i]).get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          studentId = doc.id;
-          db.collection('users').doc(studentId).update({
-            class : "",
-          });
+      let studentId = db.collection('users').where('role', '==', 0).where('email', '==', thisStudents[i]).get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            studentId = doc.id;
+            db.collection('users').doc(studentId).update({
+              class: "",
+            });
+          })
         })
-      })
     }
     //Remove Class
     let docID = db.collection('class').where('name', '==', className).get()
@@ -61,7 +61,7 @@ const ManageClass = ({ navigation }) => {
         console.log("Error getting documents: ", error);
       });
     //console.log(thisStudents)
-    
+
 
 
 
@@ -70,9 +70,15 @@ const ManageClass = ({ navigation }) => {
     getClasses();
   }, [])
   useEffect(() => {
-    getClasses();
-
-  })
+    const db = firebase.firestore()
+    const classRef = db.collection('class');
+    const unsubscribe = classRef.onSnapshot((snapshot) => {
+      setlistClass(snapshot.docs.map(doc => doc.data()));
+    })
+    return () => {
+      unsubscribe();
+    }
+  }, [])
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>

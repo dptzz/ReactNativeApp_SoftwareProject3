@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
 const pushAction = (question, chapterName, subjectName) => StackActions.push('EditQuestion',
-    {question: question, chapter: chapterName, subject: subjectName })
+    { question: question, chapter: chapterName, subject: subjectName })
 
 
 const ManageQuestion = ({ navigation, route }) => {
@@ -49,10 +49,17 @@ const ManageQuestion = ({ navigation, route }) => {
     useEffect(() => {
         getQuestion();
     }, [])
-    useEffect(() => {
-        getQuestion();
 
-    },[listQuestions]);
+    useEffect(() => {
+        const db = firebase.firestore()
+        const questionRef = db.collection('questions').where('subject', '==', subject).where('chapter', '==', chapter);
+        const unsubscribe = questionRef.onSnapshot((snapshot) => {
+            setListQuestions(snapshot.docs.map(doc => doc.data()));
+        })
+        return () => {
+            unsubscribe();
+        }
+    }, [])
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, margin: 10 }}>
@@ -148,7 +155,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         flexDirection: 'row',
-        
+
     },
     itemname: {
         flexGrow: 1,
