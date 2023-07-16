@@ -15,6 +15,7 @@ import TeacherDashboard from './src/TeacherDashboard';
 import AdminDashboard from './src/AdminDashboard';
 import Loading from './src/Loading';
 import UsersTab from './src/UsersTab';
+import Welcome from './src/Welcome';
 
 
 
@@ -126,13 +127,13 @@ const App = () => {
           }
         })
     }
-    
+
 
   }
 
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-    
+
     return subscriber;
   }, []);
 
@@ -141,38 +142,33 @@ const App = () => {
   if (!user) {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name='Login'
-            component={Login}
-            options={{
-              headerTitle: () => <Header name="Login" />,
-              headerStyle: {
-                height: 125,
-                borderBottomLeftRadius: 50,
-                borderBottomRightRadius: 50,
-                backgroundColor: '#00E4D0',
-                shadowColor: '#000',
-                elevation: 25
-              }
-            }}
-          />
-          <Stack.Screen
-            name='Registration'
-            component={Registration}
-            options={{
-              headerTitle: () => <Header name="Registration" />,
-              headerStyle: {
-                height: 125,
-                borderBottomLeftRadius: 50,
-                borderBottomRightRadius: 50,
-                backgroundColor: '#00E4D0',
-                shadowColor: '#000',
-                elevation: 25
-              }
-            }}
-          />
-        </Stack.Navigator>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <Stack.Navigator>
+            <Stack.Screen
+              name='Welcome'
+              component={Welcome}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='Login'
+              component={Login}
+              options={{
+                headerTitle: '',
+                headerTransparent: true,
+              }}
+            />
+            <Stack.Screen
+              name='Registration'
+              component={Registration}
+              options={{
+                headerTitle: '',
+                headerTransparent: true,
+              }}
+            />
+          </Stack.Navigator>
+        </TouchableWithoutFeedback>
       </NavigationContainer>
 
     )
@@ -183,11 +179,11 @@ const App = () => {
     return (
 
       <NavigationContainer>
-        { isLoaded && (<View style ={styles.loading}><ActivityIndicator /></View>)}
+        {isLoaded && (<View style={styles.loading}><ActivityIndicator size={100}/></View>)}
         {
           userRole.role === 0 ?
             (
-              
+
               <Stack.Navigator>
                 <Stack.Screen name='QuizApp' component={QuizApp} />
                 <Stack.Screen name='Playground' component={Playground} />
@@ -275,10 +271,11 @@ export default App
 
 const styles = StyleSheet.create({
   loading: {
-    //position: 'absolute',
+    //position: 'relative',
     backgroundColor: 'white',
-    top: 0,left: 0,right: 0,bottom: 0,
+    top: 0, left: 0, right: 0, bottom: 0,
     height: '100%',
+    width: '100%',
     justifyContent: 'center',
   }
 })
