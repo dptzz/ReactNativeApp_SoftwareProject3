@@ -10,7 +10,7 @@ const EditSubject = ({ navigation, route }) => {
     const [csubjectName, setcSubjectName] = useState('')
     const [subjectCode, setSubjectCode] = useState('')
     const [csubjectCode, setcSubjectCode] = useState('')
-    
+
     const { name } = route.params
     // Go Back to manage screen
     const popAction = StackActions.pop(1);
@@ -29,6 +29,31 @@ const EditSubject = ({ navigation, route }) => {
                 })
             })
             .catch((err) => { console.log(err.message) })
+
+        let chapterID = db.collection('chapters').where('subject', '==', name).get()
+            .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    chapterID = doc.id;
+                    db.collection('chapters').doc(chapterID).update({
+                        subject: subjectName,
+                    })
+                        .catch((error) => { console.log(error.message) })
+                })
+            })
+            .catch((err) => { console.log(err.message) })
+
+        let questionID = db.collection('questions').where('subject', '==', name).get()
+            .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    questionID = doc.id;
+                    db.collection('questions').doc(questionID).update({
+                        subject: subjectName,
+                    })
+                        .catch((error) => { console.log(error.message) })
+                })
+            })
+            .catch((err) => { console.log(err.message) })
+
         console.log('done')
     }
 
@@ -114,7 +139,7 @@ const EditSubject = ({ navigation, route }) => {
                             navigation.dispatch(popAction)
                             alert('Subject ' + subjectName + ' has been updated to database')
                         } else {
-                            if ((!isClassExists && csubjectName !== subjectName) && (!isCodeExists && csubjectCode !== subjectCode ) ) {
+                            if ((!isClassExists && csubjectName !== subjectName) && (!isCodeExists && csubjectCode !== subjectCode)) {
                                 alert(`There is already a subject named ${subjectName} and coded ${subjectCode}`)
                             } else {
                                 if (!isClassExists && csubjectName !== subjectName) {
@@ -125,7 +150,7 @@ const EditSubject = ({ navigation, route }) => {
                                 }
                             }
                         }
-                        
+
 
                     }}
                 >

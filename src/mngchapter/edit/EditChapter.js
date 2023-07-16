@@ -38,6 +38,19 @@ const EditChapter = ({ navigation, route }) => {
                 })
             })
             .catch((err) => { console.log(err.message) })
+        let questionID = db.collection('questions').where('subject', '==', subjectName).where('chapter','==',cname).get()
+            .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    questionID = doc.id
+                    db.collection('questions').doc(questionID).update({
+                        chapter: name,
+                    }).catch((error) => {
+                        console.error("Error removing document: ", error);
+                    });
+                })
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
         console.log('done')
     }
     // Get subject list
