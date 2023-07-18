@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import QuizApp from './QuizApp';
-import Playground from './Playground';
+import aPlayground from './aPlayground';
 
 const Stack = createStackNavigator()
 
@@ -12,7 +12,7 @@ export default function Navigation() {
     <NavigationContainer>
       <Stack>
         <Stack.Screen name='QuizApp' component={QuizApp} />
-        <Stack.Screen name='Playground' component={Playground} />
+        <Stack.Screen name='Playground' component={aPlayground} />
 
       </Stack>
     </NavigationContainer>

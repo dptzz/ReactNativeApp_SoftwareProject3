@@ -179,14 +179,14 @@ const App = () => {
     return (
 
       <NavigationContainer>
-        {isLoaded && (<View style={styles.loading}><ActivityIndicator size={100}/></View>)}
+        {isLoaded && (<View style={styles.loading}><ActivityIndicator size={100} /></View>)}
         {
           userRole.role === 0 ?
             (
 
               <Stack.Navigator>
                 <Stack.Screen name='QuizApp' component={QuizApp} />
-                <Stack.Screen name='Playground' component={Playground} />
+                <Stack.Screen name='Playground' component={Playground} options={{ headerShown: false }} />
               </Stack.Navigator>
 
             ) : userRole.role === 1 ? (
@@ -205,50 +205,130 @@ const App = () => {
                   {/* Manage classes */}
                   <Stack.Group>
                     {/* <Stack.Screen name='ManageClass' component={ManageClass} /> */}
-                    <Stack.Screen name='AddClass1' component={AddClass1} />
-                    <Stack.Screen name='AddClass2' component={AddClass2} />
-                    <Stack.Screen name='AddClass3' component={AddClass3} />
-                    <Stack.Screen name='EditClass1' component={EditClass1} />
-                    <Stack.Screen name='EditClass2' component={EditClass2} />
-                    <Stack.Screen name='EditClass3' component={EditClass3} />
+                    <Stack.Screen name='AddClass1' component={AddClass1} 
+                    options={{
+                      headerTitle: 'Add Class Step 1',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='AddClass2' component={AddClass2} 
+                    options={{
+                      headerTitle: 'Step 2',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='AddClass3' component={AddClass3} 
+                    options={{
+                      headerTitle: 'Step 3',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='EditClass1' component={EditClass1} 
+                    options={{
+                      headerTitle: 'Edit Class Step 1',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='EditClass2' component={EditClass2} 
+                    options={{
+                      headerTitle: 'Step 2',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='EditClass3' component={EditClass3} 
+                    options={{
+                      headerTitle: 'Step 3',
+                      headerTitleAlign: 'center',
+                    }}/>
                   </Stack.Group>
 
                   {/* Manage subjects */}
 
                   <Stack.Group>
                     {/* <Stack.Screen name='ManageSubjects' component={ManageSubjects} /> */}
-                    <Stack.Screen name='AddSubject' component={AddSubject} />
-                    <Stack.Screen name='EditSubject' component={EditSubject} />
+                    <Stack.Screen name='AddSubject' component={AddSubject} 
+                    options={{
+                      headerTitle: 'Add Subject',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='EditSubject' component={EditSubject} 
+                    options={{
+                      headerTitle: 'Edit Subject',
+                      headerTitleAlign: 'center',
+                    }}/>
 
                     {/* Manage chapter */}
-                    <Stack.Screen name='ManageChapter' component={ManageChapter} />
-                    <Stack.Screen name='AddChapter' component={AddChapter} />
-                    <Stack.Screen name='EditChapter' component={EditChapter} />
+                    <Stack.Screen name='ManageChapter' component={ManageChapter} 
+                    options={{
+                      headerTitle: 'Manage Chapter',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='AddChapter' component={AddChapter} 
+                    options={{
+                      headerTitle: 'Add Chapter',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='EditChapter' component={EditChapter} 
+                    options={{
+                      headerTitle: 'Edit Chapter',
+                      headerTitleAlign: 'center',
+                    }}/>
 
                     {/* Manage questions */}
-                    <Stack.Screen name='ManageQuestion' component={ManageQuestion} />
-                    <Stack.Screen name='AddQuestion' component={AddQuestion} />
+                    <Stack.Screen name='ManageQuestion' component={ManageQuestion} 
+                    options={{
+                      headerTitle: 'Manage Question',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='AddQuestion' component={AddQuestion} 
+                    options={{
+                      headerTitle: 'Add Question',
+                      headerTitleAlign: 'center',
+                    }} />
 
-                    <Stack.Screen name='EditQuestion' component={EditQuestion} />
+                    <Stack.Screen name='EditQuestion' component={EditQuestion}
+                    options={{
+                      headerTitle: 'Edit Question',
+                      headerTitleAlign: 'center',
+                    }} />
 
                   </Stack.Group>
 
                   {/* Manage teachers */}
                   <Stack.Group>
-                    <Stack.Screen name='ManageTeachers' component={ManageTeachers} />
-                    <Stack.Screen name='EditTeacher' component={EditTeacher} />
+                    <Stack.Screen name='ManageTeachers' component={ManageTeachers} 
+                    options={{
+                      headerTitle: 'Manage Teacher',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='EditTeacher' component={EditTeacher} 
+                    options={{
+                      headerTitle: 'Edit Teacher',
+                      headerTitleAlign: 'center',
+                    }}/>
                   </Stack.Group>
 
                   {/* Manage students */}
                   <Stack.Group>
-                    <Stack.Screen name='ManageStudents' component={ManageStudents} />
-                    <Stack.Screen name='EditStudent' component={EditStudent} />
+                    <Stack.Screen name='ManageStudents' component={ManageStudents} 
+                    options={{
+                      headerTitle: 'Manage Student',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='EditStudent' component={EditStudent} 
+                    options={{
+                      headerTitle: 'Edit Student',
+                      headerTitleAlign: 'center',
+                    }}/>
                   </Stack.Group>
 
                   {/* Manage Role */}
                   <Stack.Group>
-                    <Stack.Screen name='ManageRole' component={ManageRole} />
-                    <Stack.Screen name='SetRole' component={SetRole} />
+                    <Stack.Screen name='ManageRole' component={ManageRole} 
+                    options={{
+                      headerTitle: 'Manage Role',
+                      headerTitleAlign: 'center',
+                    }}/>
+                    <Stack.Screen name='SetRole' component={SetRole} 
+                    options={{
+                      headerTitle: 'Set Role',
+                      headerTitleAlign: 'center',
+                    }}/>
 
                   </Stack.Group>
 

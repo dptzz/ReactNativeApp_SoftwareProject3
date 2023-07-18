@@ -6,8 +6,8 @@ import { firebase } from '../../FirebaseConfig'
 
 
 const SetRole = ({ navigation, route }) => {
-  
-  
+
+
   const [role, setRole] = useState(0)
 
   const { email } = route.params
@@ -42,7 +42,7 @@ const SetRole = ({ navigation, route }) => {
       return;
     }
     const thisUser = snapshot.docs.map(doc => doc.data());
-    
+
     setRole(thisUser[0].role)
 
   }
@@ -51,27 +51,28 @@ const SetRole = ({ navigation, route }) => {
   }, [])
 
   return (
-    <View style={{ flex: 1 }}>
-      
-      <ScrollView style={{ flex: 1, margin: 10 }}>
+    <View style={styles.container}>
+
+      <ScrollView >
         {/* Title section */}
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>User Email</Text>
-        <TextInput
-          placeholder='Email'
-          style={{ borderWidth: 1, padding: 10, fontSize: 24, marginBottom: 10 }}
-          
-          value={email}
-          keyboardType="default"
-          returnKeyType="done"
-          
-         
-          
-        />
+        <View style={styles.view1}>
+          <Text style={styles.text}>User Email</Text>
+          <TextInput
+            placeholder='Email'
+            style={styles.textInput}
 
+            value={email}
+            keyboardType="default"
+            returnKeyType="done"
+
+
+
+          />
+        </View>
         {/* Difficulty section */}
-        <View style={{ flex: 1 }}>
+        <View style={styles.view2}>
 
-          <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>Role</Text>
+          <Text style={[styles.text, { marginBottom: 10 }]}>Role</Text>
           <View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -79,7 +80,7 @@ const SetRole = ({ navigation, route }) => {
                   <Image source={role !== 0 ? require('../../assets/icon/radio-button.png') : require('../../assets/icon/radio-button-checked.png')}
                     style={styles.radioTouchableOpacictyIcon} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 18 }}>Student</Text>
+                <Text style={{ fontSize: 15 }}>Student</Text>
               </View>
 
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -87,7 +88,7 @@ const SetRole = ({ navigation, route }) => {
                   <Image source={role !== 1 ? require('../../assets/icon/radio-button.png') : require('../../assets/icon/radio-button-checked.png')}
                     style={styles.radioTouchableOpacictyIcon} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 18 }}>Teacher</Text>
+                <Text style={{ fontSize: 15 }}>Teacher</Text>
               </View>
 
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -95,7 +96,7 @@ const SetRole = ({ navigation, route }) => {
                   <Image source={role !== 2 ? require('../../assets/icon/radio-button.png') : require('../../assets/icon/radio-button-checked.png')}
                     style={styles.radioTouchableOpacictyIcon} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 18 }}>Admin</Text>
+                <Text style={{ fontSize: 15 }}>Admin</Text>
               </View>
 
             </View>
@@ -106,15 +107,15 @@ const SetRole = ({ navigation, route }) => {
       </ScrollView>
       <View>
         <TouchableOpacity
-          
+
           style={[
             styles.nextbutton,
-            
+
           ]}
           onPress={() => {
             handleSubmit(role);
             navigation.dispatch(popAction)
-            alert('User: ' + email +"'s role has been updated to: "+ role === 0 ? 'Student': role === 1 ? 'Teacher' : 'Admin')
+            alert('User: ' + email + "'s role has been updated to: " + role === 0 ? 'Student' : role === 1 ? 'Teacher' : 'Admin')
           }}
         >
           <Text style={styles.nextbuttontext}>Submit</Text>
@@ -129,17 +130,37 @@ const SetRole = ({ navigation, route }) => {
 export default SetRole
 
 const styles = StyleSheet.create({
-  item: {
+  container: {
+    flex: 1,
+    backgroundColor: 'lightgrey',
+  },
+  textInput: {
+    borderWidth: 1,
+    marginTop: 5,
+    flexGrow: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+  },
+  text: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  view1: {
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginHorizontal: 10,
+    paddingTop: 30,
     padding: 10,
-    borderBottomWidth: 1
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
   },
-  itemname: {
-    fontSize: 24,
-  },
-  answers: {
-    borderWidth: 1, padding: 10, fontSize: 24,
-    marginLeft: 10,
-    flexGrow: 1
+  view2: {
+    backgroundColor: 'white',
+    margin: 10,
+    padding: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10
   },
   radioTouchableOpacicty: {
     flexShrink: 0,
@@ -148,6 +169,7 @@ const styles = StyleSheet.create({
     height: 30,
     alignItems: 'center',
     justifyContent: 'center',
+    marginRight: 5
   },
   radioTouchableOpacictyIcon: {
     width: 30,
@@ -158,10 +180,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#949494',
   },
   nextbutton: {
-    padding: 10,
-    borderWidth: 0,
-    backgroundColor: 'lightgreen',
+    backgroundColor: 'rgb(0,255,153)',
+    margin: 10,
+    justifyContent: 'center',
     alignItems: 'center',
+    height: 50,
+    borderRadius: 10
 
   },
   nextbuttontext: {
@@ -172,9 +196,8 @@ const styles = StyleSheet.create({
   nextbuttonDisabled: {
     padding: 10,
     borderWidth: 0,
-    backgroundColor: 'red',
+    backgroundColor: 'rgb(255,51,51)',
     alignItems: 'center',
-
   }
 
 })

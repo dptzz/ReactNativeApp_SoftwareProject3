@@ -71,7 +71,7 @@ const QuizApp = ({ navigation }) => {
           renderItem={({ item, index }) => (
             <TouchableOpacity
               style={styles.category}
-              onPress={() => navigation.navigate('Playground', { subject: item })}>
+              onPress={() => navigation.navigate('Playground', { subject: item, userName: currentUser.firstName, userClass: currentUser.class })}>
               <Text style={styles.categoryTitle}>{item}</Text>
             </TouchableOpacity>
 

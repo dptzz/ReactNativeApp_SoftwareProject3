@@ -90,28 +90,28 @@ const EditStudent = ({ navigation, route }) => {
 
     })
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ flex: 1, margin: 10 }}>
+        <View style={styles.container}>
+            <View style={styles.view1}>
                 {/* <Text>{className},{teacher}</Text> */}
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>First Name</Text>
+                <Text style={styles.text}>First Name</Text>
                 <TextInput
                     placeholder='First name'
-                    style={{ borderWidth: 1, padding: 10, fontSize: 24 }}
+                    style={styles.textInput}
                     onChangeText={setFirstName}
                     value={firstName}
                 />
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Last Name</Text>
+                <Text style={styles.text}>Last Name</Text>
                 <TextInput
                     placeholder='Last name'
-                    style={{ borderWidth: 1, padding: 10, fontSize: 24 }}
+                    style={styles.textInput}
                     onChangeText={setLastName}
                     value={lastName}
                 />
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Class</Text>
+                <Text style={styles.text}>Class</Text>
                 <Text
-                    placeholder='Last name'
-                    style={{ borderWidth: 1, padding: 10, fontSize: 24, backgroundColor: '#BFBFBF' }}
-                    onChangeText={setFirstName}
+                    
+                    style={[styles.textInput,{ borderWidth: 1, paddingHorizontal: 10, paddingVertical: 15, backgroundColor: '#BFBFBF' }]}
+                    
                 // disabled= {true}
 
                 >{sclass}</Text>
@@ -142,7 +142,7 @@ const EditStudent = ({ navigation, route }) => {
                 </View> */}
 
             </View>
-            <View>
+            <View style= {{flex:1,justifyContent: 'flex-end'}}>
                 <TouchableOpacity
                     disabled={
                         !firstName || !lastName
@@ -169,22 +169,37 @@ const EditStudent = ({ navigation, route }) => {
 export default EditStudent
 
 const styles = StyleSheet.create({
-    item: {
+    container: {
+        flex: 1,
+        backgroundColor: 'lightgrey',
+    },
+    text: {
+        color: 'black',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    textInput: {
+        borderWidth: 1,
+        marginTop: 5,
+        flexGrow: 1,
+        borderRadius: 10,
+        paddingHorizontal: 10
+    },
+    view1: {
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginHorizontal: 10,
+        paddingVertical: 30,
         padding: 10,
-        borderBottomWidth: 1
-    },
-    itemname: {
-        fontSize: 24,
-    },
-    selectedOptions: {
-        backgroundColor: '#949494',
+        borderRadius: 10
     },
     nextbutton: {
-        padding: 10,
-        borderWidth: 0,
-        backgroundColor: 'lightgreen',
+        backgroundColor: 'rgb(0,255,153)',
+        margin: 10,
+        justifyContent: 'center',
         alignItems: 'center',
-
+        height: 50,
+        borderRadius: 10
     },
     nextbuttontext: {
         fontWeight: 'bold',
@@ -194,9 +209,8 @@ const styles = StyleSheet.create({
     nextbuttonDisabled: {
         padding: 10,
         borderWidth: 0,
-        backgroundColor: 'red',
         alignItems: 'center',
-
+        backgroundColor: 'rgb(255,51,51)'
     }
 
 })

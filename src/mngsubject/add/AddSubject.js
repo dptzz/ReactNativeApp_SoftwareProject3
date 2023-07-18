@@ -53,21 +53,23 @@ const AddSubject = ({ navigation }) => {
         checkCodeExists(subjectCode);
     })
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ flex: 1, margin: 10 }}>
+        <View style={styles.container}>
+            <View style={styles.view1}>
                 {/* <Text>{className},{teacher}</Text> */}
+                <Text style={styles.text}>Subject Name</Text>
                 <TextInput
                     placeholder='Subject Name'
-                    style={{ borderWidth: 1, padding: 10, fontSize: 24, marginBottom: 10 }}
+                    style={styles.textInput}
                     onChangeText={setSubjectName}
                 />
+                <Text style={styles.text}>Subject Code</Text>
                 <TextInput
                     placeholder='Subject Code'
-                    style={{ borderWidth: 1, padding: 10, fontSize: 24, marginBottom: 10 }}
+                    style={styles.textInput}
                     onChangeText={setSubjectCode}
                 />
             </View>
-            <View>
+            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <TouchableOpacity
                     disabled={
                         !subjectName || !subjectCode
@@ -107,11 +109,37 @@ const AddSubject = ({ navigation }) => {
 export default AddSubject
 
 const styles = StyleSheet.create({
-    nextbutton: {
+    container: {
+        flex: 1,
+        backgroundColor: 'lightgrey',
+    },
+    textInput: {
+        borderWidth: 1,
+        marginTop: 5,
+        flexGrow: 1,
+        borderRadius: 10,
+        paddingHorizontal: 10,
+    },
+    text: {
+        color: 'black',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    view1: {
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginHorizontal: 10,
+        paddingVertical: 30,
         padding: 10,
-        borderWidth: 0,
-        backgroundColor: 'lightgreen',
+        borderRadius: 10,
+    },
+    nextbutton: {
+        backgroundColor: 'rgb(0,255,153)',
+        margin: 10,
+        justifyContent: 'center',
         alignItems: 'center',
+        height: 50,
+        borderRadius: 10
 
     },
     nextbuttontext: {
@@ -122,8 +150,9 @@ const styles = StyleSheet.create({
     nextbuttonDisabled: {
         padding: 10,
         borderWidth: 0,
-        backgroundColor: 'red',
+        backgroundColor: 'rgb(255,51,51)',
         alignItems: 'center',
+
 
     }
 

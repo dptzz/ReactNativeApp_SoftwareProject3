@@ -32,100 +32,123 @@ const AddQuestion = ({ navigation, route }) => {
 
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
             <ScrollView style={{ flex: 1, margin: 10 }}>
                 {/* Title section */}
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Question title</Text>
-                <TextInput
-                    placeholder='Question title'
-                    style={{ borderWidth: 1, padding: 10, fontSize: 24, marginBottom: 10 }}
-                    onChangeText={setQuestionTitle}
-                    keyboardType="default"
-                    returnKeyType="done"
-                    multiline={true}
-                    blurOnSubmit={true}
-                />
-
-                {/* Answers section */}
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Answers</Text>
-                <View style={{ flexShrink: 0 }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-                        <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(1)}>
-
-
-                            <Image source={1 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
-                                style={[
-                                    styles.radioTouchableOpacictyIcon
-
-                                ]} />
-
-                        </TouchableOpacity>
-                        <TextInput
-                            placeholder='Option 1'
-                            style={styles.answers}
-                            onChangeText={setOption1}
-                        />
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-                        <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(2)}>
-
-
-                            <Image source={2 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
-                                style={[
-                                    styles.radioTouchableOpacictyIcon
-
-                                ]} />
-
-                        </TouchableOpacity>
-                        <TextInput
-                            placeholder='Option 2'
-                            style={styles.answers}
-                            onChangeText={setOption2}
-                        />
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-                        <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(3)}>
-
-
-                            <Image source={3 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
-                                style={[
-                                    styles.radioTouchableOpacictyIcon
-
-                                ]} />
-
-                        </TouchableOpacity>
-                        <TextInput
-                            placeholder='Option 3'
-                            style={styles.answers}
-                            onChangeText={setOption3}
-                        />
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-                        <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(4)}>
-
-
-                            <Image source={4 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
-                                style={[
-                                    styles.radioTouchableOpacictyIcon
-
-                                ]} />
-
-                        </TouchableOpacity>
-                        <TextInput
-                            placeholder='Option 4'
-                            style={styles.answers}
-                            onChangeText={setOption4}
-                        />
-                    </View>
-
-
+                <View style={styles.titleContainer}>
+                    <Text style={styles.text}>Question title</Text>
+                    <TextInput
+                        placeholder='Question title'
+                        style={[styles.answers, { width: 'auto' }]}
+                        onChangeText={setQuestionTitle}
+                        keyboardType="default"
+                        returnKeyType="done"
+                        multiline={true}
+                        blurOnSubmit={true}
+                    />
                 </View>
 
 
-                {/* Difficulty section */}
-                <View style={{ flex: 1 }}>
+                {/* Answers section */}
+                <View style={styles.answersContainer}>
+                    <Text style={styles.text}>Answers</Text>
+                    <View style={{ flexShrink: 0 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                            <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(1)}>
 
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>Difficulty</Text>
+
+                                <Image source={1 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
+                                    style={[
+                                        styles.radioTouchableOpacictyIcon
+
+                                    ]} />
+
+                            </TouchableOpacity>
+                            <TextInput
+                                placeholder='Option 1'
+                                style={styles.answers}
+                                onChangeText={setOption1}
+                                keyboardType="default"
+                                returnKeyType="done"
+                                multiline={true}
+                                blurOnSubmit={true}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                            <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(2)}>
+
+
+                                <Image source={2 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
+                                    style={[
+                                        styles.radioTouchableOpacictyIcon
+
+                                    ]} />
+
+                            </TouchableOpacity>
+                            <TextInput
+                                placeholder='Option 2'
+                                style={styles.answers}
+                                onChangeText={setOption2}
+                                keyboardType="default"
+                                returnKeyType="done"
+                                multiline={true}
+                                blurOnSubmit={true}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                            <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(3)}>
+
+
+                                <Image source={3 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
+                                    style={[
+                                        styles.radioTouchableOpacictyIcon
+
+                                    ]} />
+
+                            </TouchableOpacity>
+                            <TextInput
+                                placeholder='Option 3'
+                                style={styles.answers}
+                                onChangeText={setOption3}
+                                keyboardType="default"
+                                returnKeyType="done"
+                                multiline={true}
+                                blurOnSubmit={true}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                            <TouchableOpacity style={styles.radioTouchableOpacicty} onPress={() => setCorrectOption(4)}>
+
+
+                                <Image source={4 !== correctOption ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
+                                    style={[
+                                        styles.radioTouchableOpacictyIcon
+
+                                    ]} />
+
+                            </TouchableOpacity>
+                            <TextInput
+                                placeholder='Option 4'
+                                style={styles.answers}
+                                onChangeText={setOption4}
+                                keyboardType="default"
+                                returnKeyType="done"
+                                multiline={true}
+                                blurOnSubmit={true}
+                            />
+                        </View>
+
+
+                    </View>
+                </View>
+
+
+
+
+                {/* Difficulty section */}
+                <View style={styles.difficultyContainer}>
+
+                    <Text style={[styles.text, { marginBottom: 10 }]}>Difficulty</Text>
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -133,7 +156,7 @@ const AddQuestion = ({ navigation, route }) => {
                                     <Image source={difficulty !== 'easy' ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
                                         style={styles.radioTouchableOpacictyIcon} />
                                 </TouchableOpacity>
-                                <Text style={{ fontSize: 18 }}>Easy</Text>
+                                <Text style={{ fontSize: 15 }}>Easy</Text>
                             </View>
 
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -141,7 +164,7 @@ const AddQuestion = ({ navigation, route }) => {
                                     <Image source={difficulty !== 'normal' ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
                                         style={styles.radioTouchableOpacictyIcon} />
                                 </TouchableOpacity>
-                                <Text style={{ fontSize: 18 }}>Normal</Text>
+                                <Text style={{ fontSize: 15 }}>Normal</Text>
                             </View>
 
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -149,7 +172,7 @@ const AddQuestion = ({ navigation, route }) => {
                                     <Image source={difficulty !== 'hard' ? require('../../../assets/icon/radio-button.png') : require('../../../assets/icon/radio-button-checked.png')}
                                         style={styles.radioTouchableOpacictyIcon} />
                                 </TouchableOpacity>
-                                <Text style={{ fontSize: 18 }}>Hard</Text>
+                                <Text style={{ fontSize: 15 }}>Hard</Text>
                             </View>
 
                         </View>
@@ -185,17 +208,52 @@ const AddQuestion = ({ navigation, route }) => {
 export default AddQuestion
 
 const styles = StyleSheet.create({
-    item: {
-        padding: 10,
-        borderBottomWidth: 1
+    container: {
+        flex: 1,
+        backgroundColor: 'lightgrey',
     },
-    itemname: {
-        fontSize: 24,
+    text: {
+        color: 'black',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    titleContainer: {
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginHorizontal: 10,
+        paddingTop: 30,
+        padding: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
+    },
+    answersContainer: {
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginHorizontal: 10,
+        padding: 10,
+    },
+    difficultyContainer: {
+        backgroundColor: 'white',
+        margin: 10,
+        padding: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10
     },
     answers: {
-        borderWidth: 1, padding: 10, fontSize: 24,
-        marginLeft: 10,
-        flexGrow: 1
+        // borderWidth: 1, padding: 10, fontSize: 24,
+        // marginLeft: 10,
+        // flexGrow: 1
+        borderWidth: 1,
+        marginTop: 5,
+        flexGrow: 1,
+        borderRadius: 10,
+        paddingHorizontal: 10,
+        width: '80%'
+    },
+    text: {
+        color: 'black',
+        fontSize: 20,
+        fontWeight: 'bold'
     },
     radioTouchableOpacicty: {
         flexShrink: 0,
@@ -204,6 +262,7 @@ const styles = StyleSheet.create({
         height: 30,
         alignItems: 'center',
         justifyContent: 'center',
+        marginRight: 10
     },
     radioTouchableOpacictyIcon: {
         width: 30,
@@ -214,10 +273,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#949494',
     },
     nextbutton: {
-        padding: 10,
-        borderWidth: 0,
-        backgroundColor: 'lightgreen',
+        backgroundColor: 'rgb(0,255,153)',
+        margin: 10,
+        justifyContent: 'center',
         alignItems: 'center',
+        height: 50,
+        borderRadius: 10
 
     },
     nextbuttontext: {
@@ -228,7 +289,7 @@ const styles = StyleSheet.create({
     nextbuttonDisabled: {
         padding: 10,
         borderWidth: 0,
-        backgroundColor: 'red',
+        backgroundColor: 'rgb(255,51,51)',
         alignItems: 'center',
 
     }
