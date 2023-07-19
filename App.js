@@ -13,13 +13,13 @@ import Registration from './src/Registration';
 import Dashboard from './src/Dashboard';
 import TeacherDashboard from './src/TeacherDashboard';
 import AdminDashboard from './src/AdminDashboard';
-import Loading from './src/Loading';
+
 import UsersTab from './src/UsersTab';
 import Welcome from './src/Welcome';
 
 
 
-import Header from './component/Header';
+
 
 //Manage classes
 import ManageClass from './src/mngclass/ManageClass';
