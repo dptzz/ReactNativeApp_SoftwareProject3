@@ -1,6 +1,7 @@
-import { TouchableOpacity, StyleSheet, Text, View, FlatList } from 'react-native'
+import { TouchableOpacity, StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 import { firebase } from '../FirebaseConfig'
 
 const QuizApp = ({ navigation }) => {
@@ -13,7 +14,7 @@ const QuizApp = ({ navigation }) => {
 
     const classRef = db.collection('class')
     if (Object.keys(currentUser).length > 0) {
-      const snapshot = await classRef.where('name', 'in', [currentUser["class"],""]).get()
+      const snapshot = await classRef.where('name', 'in', [currentUser["class"], ""]).get()
       if (snapshot.empty) {
         console.log('No matching documents...');
         return;
@@ -60,33 +61,57 @@ const QuizApp = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 20, fontWeight: 'bold' }}>Welcome back {currentUser.firstName}!</Text>
+      <View style={styles.containerV1}>
+        <View style={styles.viewV1}>
+          <View style={{ paddingHorizontal: 15, paddingVertical: 5, borderWidth: 0, padding: 5, borderRadius: 15,shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5, justifyContent: 'center', backgroundColor: 'rgb(101,220,65)' }}>
+            <Text style={styles.textV1}>Name: {currentUser.firstName}</Text>
+            <Text style={styles.textV1}>Class: {currentUser.class}</Text>
+          </View>
+          <View style={{ padding: 5, borderRadius: 10, justifyContent: 'center' }}>
+            <TouchableOpacity
+              style={{shadowColor: '#000000',
+              shadowRadius: 5,
+              elevation: 5,}}
+              onPress={() => firebase.auth().signOut()}>
+              <Icon name="sign-out-alt" size={28} />
+            </TouchableOpacity>
 
-      <View style={styles.categoriesContainer}>
+            {/* <Image source={require('../assets/icon/bookIcon.png')} style={{ height: 48, width: 48 }}></Image> */}
+          </View>
+        </View>
+
+      </View>
+
+      <View style={styles.containerV2}>
 
         <FlatList
           data={subjects}
           numColumns={2}
           alignItems={'center'}
           renderItem={({ item, index }) => (
-            <TouchableOpacity
-              style={styles.category}
-              onPress={() => navigation.navigate('Playground', { subject: item, userName: currentUser.firstName, userClass: currentUser.class })}>
-              <Text style={styles.categoryTitle}>{item}</Text>
-            </TouchableOpacity>
-
+            <View style={styles.subjectsView}>
+              <View style={{ backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30, width: 180 }}>
+                <TouchableOpacity
+                  style={styles.subject}
+                  onPress={() => navigation.navigate('Playground', { subject: item, userName: currentUser.firstName, userClass: currentUser.userClass })}>
+                  <Text style={styles.textV2}>{item}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           )}
         />
 
 
       </View>
-      <View style={styles.categoriesContainer}>
+      {/* <View style={styles.categoriesContainer}>
         <TouchableOpacity
           style={styles.signOutButton}
           onPress={() => firebase.auth().signOut()}>
           <Text style={styles.signOutButtonText}>Sign Out</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
     </View>
   )
@@ -97,6 +122,70 @@ export default QuizApp
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  containerV1: {
+    marginTop: 20,
+    marginHorizontal: 20,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    paddingBottom: 20
+  },
+  containerV2: {
+    backgroundColor: 'white',
+    marginTop: 20,
+    marginHorizontal: 10,
+    marginBottom: 20,
+    borderRadius: 20,
+  },
+  subjectsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  subject: {
+    marginTop: 3,
+    paddingVertical: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    backgroundColor: 'rgb(39,170,255)',
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  pic: {
+    height: 40,
+    width: 40
+  },
+  textV1: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  textV2: {
+    color: 'white',
+    fontSize: 17,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: -3
+  },
+  viewV1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    
+  },
+  text: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   categoriesContainer: {
     flexDirection: 'row',

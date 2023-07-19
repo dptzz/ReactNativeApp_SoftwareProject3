@@ -185,7 +185,7 @@ const App = () => {
             (
 
               <Stack.Navigator>
-                <Stack.Screen name='QuizApp' component={QuizApp} />
+                <Stack.Screen name='QuizApp' component={QuizApp} options={{headerShown: false}}/>
                 <Stack.Screen name='Playground' component={Playground} options={{ headerShown: false }} />
               </Stack.Navigator>
 

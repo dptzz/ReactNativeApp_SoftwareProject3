@@ -181,7 +181,7 @@ const AddQuestion = ({ navigation, route }) => {
 
 
             </ScrollView>
-            <View>
+            <View style={{backgroundColor: 'red'}}>
                 <TouchableOpacity
                     disabled={
                         !questionTitle || !option1 || !option2 || !option3 || !option4 || !difficulty || !correctOption
@@ -210,7 +210,7 @@ export default AddQuestion
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'white',
     },
     text: {
         color: 'black',
@@ -220,24 +220,34 @@ const styles = StyleSheet.create({
     titleContainer: {
         backgroundColor: 'white',
         marginTop: 10,
-        marginHorizontal: 10,
+        marginHorizontal: 5,
         paddingTop: 30,
         padding: 10,
         borderTopLeftRadius: 10,
-        borderTopRightRadius: 10
+        borderTopRightRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
     },
     answersContainer: {
         backgroundColor: 'white',
         marginTop: 10,
-        marginHorizontal: 10,
+        marginHorizontal: 5,
         padding: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
     },
     difficultyContainer: {
         backgroundColor: 'white',
-        margin: 10,
+        marginVertical: 10,
+        margin: 5,
         padding: 10,
         borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10
+        borderBottomRightRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
     },
     answers: {
         // borderWidth: 1, padding: 10, fontSize: 24,
@@ -278,7 +288,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 50,
-        borderRadius: 10
+        borderRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
 
     },
     nextbuttontext: {

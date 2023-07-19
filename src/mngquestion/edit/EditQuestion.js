@@ -188,7 +188,7 @@ const EditQuestion = ({ navigation, route }) => {
         {/* Difficulty section */}
         <View style={styles.difficultyContainer}>
 
-          <Text style={[styles.text, {marginBottom:10}]}>Difficulty</Text>
+          <Text style={[styles.text, { marginBottom: 10 }]}>Difficulty</Text>
           <View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -250,7 +250,7 @@ export default EditQuestion
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'white',
   },
   text: {
     color: 'black',
@@ -260,25 +260,34 @@ const styles = StyleSheet.create({
   titleContainer: {
     backgroundColor: 'white',
     marginTop: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     paddingTop: 30,
     padding: 10,
     borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    borderTopRightRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
   },
   answersContainer: {
     backgroundColor: 'white',
     marginTop: 10,
-    marginHorizontal: 10,
-   
+    marginHorizontal: 5,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
     padding: 10,
   },
   difficultyContainer: {
     backgroundColor: 'white',
-    margin: 10,
+    marginVertical: 10,
+    margin: 5,
     padding: 10,
     borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10
+    borderBottomRightRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
   },
   answers: {
     // borderWidth: 1, padding: 10, fontSize: 24,
@@ -319,7 +328,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
-    borderRadius: 10
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
 
   },
   nextbuttontext: {

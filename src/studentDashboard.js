@@ -13,7 +13,7 @@ const dotestUI = () => {
 
             <View style={styles.containerV1}>
                 <View style={styles.viewV1}>
-                    <View style={{paddingHorizontal: 15,paddingVertical: 5, borderWidth: 1, padding: 5, borderRadius: 15, justifyContent: 'center', backgroundColor: 'rgb(101,220,65)' }}>
+                    <View style={{ paddingHorizontal: 15, paddingVertical: 5, borderWidth: 1, padding: 5, borderRadius: 15, justifyContent: 'center', backgroundColor: 'rgb(101,220,65)' }}>
                         <Text style={styles.textV1}>Name: Gia Bao</Text>
                         <Text style={styles.textV1}>Class: Lop Diu</Text>
                     </View>
@@ -29,10 +29,10 @@ const dotestUI = () => {
                     data={data}
                     renderItem={({ item, index }) => (
                         <View style={styles.subjectsView}>
-                            <View style={{flex: 1, backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30}}>
+                            <View style={{ flex: 1, backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30 }}>
                                 <TouchableOpacity style={styles.subject}><Text style={styles.textV2}>GDCD 12</Text></TouchableOpacity>
                             </View>
-                            <View style={{flex: 1, backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30}}>
+                            <View style={{ flex: 1, backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30 }}>
                                 <TouchableOpacity style={styles.subject}><Text style={styles.textV2}>Văn Học 12</Text></TouchableOpacity>
                             </View>
                         </View>
