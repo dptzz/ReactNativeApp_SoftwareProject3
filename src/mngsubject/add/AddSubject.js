@@ -111,7 +111,7 @@ export default AddSubject
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'white',
     },
     textInput: {
         borderWidth: 1,
@@ -132,6 +132,9 @@ const styles = StyleSheet.create({
         paddingVertical: 30,
         padding: 10,
         borderRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
     },
     nextbutton: {
         backgroundColor: 'rgb(0,255,153)',
@@ -139,7 +142,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 50,
-        borderRadius: 10
+        borderRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
 
     },
     nextbuttontext: {
