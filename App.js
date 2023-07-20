@@ -192,7 +192,7 @@ const App = () => {
             ) : userRole.role === 1 ? (
 
               <Stack.Navigator>
-                <Stack.Screen name='TeacherDashboard' component={TeacherDashboard} />
+                <Stack.Screen name='TeacherDashboard' component={TeacherDashboard} options={{ headerShown: false }}/>
                 <Stack.Screen name='Playground' component={Playground} />
               </Stack.Navigator>
 
