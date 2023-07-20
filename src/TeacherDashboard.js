@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const TeacherDashboard = ({navigation}) => {
   const [name, setName] = useState('')
-
+  const [subject, setSubject] = useState('')
   useEffect(() => {
     firebase.firestore().collection('users')
       .doc(firebase.auth().currentUser.uid).get()

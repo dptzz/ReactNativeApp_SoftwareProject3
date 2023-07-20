@@ -9,8 +9,16 @@ const SetRole = ({ navigation, route }) => {
 
 
   const [role, setRole] = useState(0)
-
+  const [subjects, setSubjects] = useState()
+  const [selectSubject, setSelectSubject] = useState()
+  const [selecetedOptions, setSelecetOptions] = useState(0)
   const { email } = route.params
+
+  const handleOptionSelect = (index, name) => {
+    setSelecetOptions(index)
+    setSelectSubject(name)
+  }
+
 
   // Go Back to manage screen
   const popAction = StackActions.pop(1);
@@ -27,6 +35,11 @@ const SetRole = ({ navigation, route }) => {
             role: role,
           })
             .catch((error) => { console.log(error.message) })
+          if (role === 1) {
+            db.collection('users').doc(docId).update({
+              subject: selectSubject,
+            })
+          }
         })
       })
       .catch((err) => { console.log(err.message) })
@@ -46,16 +59,30 @@ const SetRole = ({ navigation, route }) => {
     setRole(thisUser[0].role)
 
   }
+  const getSubject = async () => {
+    const db = firebase.firestore()
+    const subjectRef = db.collection('subjects');
+    const snapshot = await subjectRef.get();
+    if (snapshot.empty) {
+      console.log('No matching documents...');
+      return;
+    }
+    const subjectsList = snapshot.docs.map(doc => doc.data());
+
+    setSubjects(subjectsList);
+
+  }
   useEffect(() => {
     getThisUser();
+    getSubject();
   }, [])
 
   return (
     <View style={styles.container}>
 
-      <ScrollView >
+      <View style={{flex:1}}>
         {/* Title section */}
-        <View style={styles.view1}>
+        <View style={[styles.view1,{}]}>
           <Text style={styles.text}>User Email</Text>
           <TextInput
             placeholder='Email'
@@ -103,8 +130,34 @@ const SetRole = ({ navigation, route }) => {
           </View>
         </View>
 
+        {role === 1 && (
+          <View style={[styles.view2, {flex:1}]}>
 
-      </ScrollView>
+            <Text style={[styles.text, { marginBottom: 10 }]}>Subjects</Text>
+            <View style={{flex:1}}>
+              <FlatList
+
+                data={subjects}
+                renderItem={({ item, index }) => (
+                  <View
+                    style={[
+                      styles.item,
+                      selecetedOptions === index && styles.selectedOptions
+                    ]}>
+                    <TouchableOpacity
+
+                      onPress={() => handleOptionSelect(index, item.name)}
+                    >
+                      <Text style={styles.itemname}>{item.name}</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              />
+            </View>
+          </View>
+        )}
+
+      </View>
       <View>
         <TouchableOpacity
 
@@ -134,6 +187,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  item: {
+    margin: 5,
+    padding: 10,
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white'
+  },
+  itemname:{
+    fontSize: 24,
+    color: 'black'
+  },
+  selectedOptions: {
+    backgroundColor: '#949494',
+  },
   textInput: {
     borderWidth: 1,
     marginTop: 5,
@@ -155,7 +224,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: 'black',
     shadowRadius: 5,
-    elevation:5
+    elevation: 5
   },
   view2: {
     backgroundColor: 'white',
@@ -164,7 +233,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: 'black',
     shadowRadius: 5,
-    elevation:5
+    elevation: 5
   },
   radioTouchableOpacicty: {
     flexShrink: 0,
@@ -192,7 +261,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: 'black',
     shadowRadius: 5,
-    elevation:5
+    elevation: 5
   },
   nextbuttontext: {
     fontWeight: 'bold',
