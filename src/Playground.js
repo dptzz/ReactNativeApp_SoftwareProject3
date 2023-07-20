@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, FlatList, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, FlatList, ScrollView , Alert} from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StackActions } from '@react-navigation/native'
 import { firebase } from '../FirebaseConfig'
+import CountDown from 'react-native-countdown-fixed'
 
 
 
@@ -49,37 +50,64 @@ const Playground = ({ navigation, route }) => {
         setShowResults(true);
     }
     return (
-        <View style={{ flex: 1, backgroundColor: 'lightgrey' }}>
-
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
+            {showResults && alert("Your score: "+score+"/"+questions.length)}
             <View style={styles.containerV1}>
                 <View style={styles.viewV1}>
-                    <View style={{ borderWidth: 1, padding: 5, borderRadius: 10, justifyContent: 'center' }}>
+                    <View style={{ borderWidth: 0, padding: 5, borderRadius: 10, justifyContent: 'center', }}>
                         <Text style={styles.textV1}>Name: {userName}</Text>
                         <Text style={styles.textV1}>Class: {userClass}</Text>
                     </View>
-                    <View style={{ borderWidth: 1, padding: 5, borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={styles.textV1}>Subject:</Text>
-                        <Text style={styles.textV1}>{subject}</Text>
+                    <View style={{
+                        borderWidth: 0, padding: 5, borderRadius: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: '#65dc41', shadowColor: 'black',
+                        shadowRadius: 5,
+                        elevation: 5
+                    }}>
+                        <CountDown
+                            until={1800}
+                            onFinish={() => {
+                                handleSubmit()
+
+                            }}
+                            digitStyle={{ backgroundColor: '#65dc41', margin: -5 }}
+                            digitTxtStyle={{ color: 'white' }}
+                            separatorStyle={{ color: 'white' }}
+                            timeToShow={['M', 'S']}
+                            timeLabels={{ m: null, s: null }}
+                            showSeparator
+                            running={!showResults}
+                        />
                     </View>
                 </View>
                 <View>
-                    <View style={{ justifyContent: 'center', borderWidth: 1, marginTop: 10, borderRadius: 10, padding: 5, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ justifyContent: 'center', borderWidth: 0, marginTop: 10, borderRadius: 10, padding: 5, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
 
                         <View>
                             <Text style={styles.textV1}>Time: 30 minutes</Text>
-                            <Text style={styles.textV1}>Remaining: 15:25</Text>
+                            <Text style={styles.textV1}>Subject: {subject} </Text>
                         </View>
 
                         {!showResults ? (
                             <TouchableOpacity
-                                onPress={() => handleSubmit()}
-                                style={{ borderWidth: 1, borderRadius: 10, padding: 10, width: '40%', alignItems: 'center', backgroundColor: 'rgb(0,255,153)' }}>
-                                <Text style={styles.textV1}>FINISH</Text>
+                                onPress={() => {
+
+                                    handleSubmit()
+                                }}
+                                style={{
+                                    borderWidth: 0, shadowColor: 'black',
+                                    shadowRadius: 5,
+                                    elevation: 5, borderRadius: 10, padding: 10, width: '40%', alignItems: 'center', backgroundColor: '#27aaff'
+                                }}>
+                                <Text style={[styles.textV1, { color: 'white' }]}>FINISH</Text>
                             </TouchableOpacity>
                         ) : (<TouchableOpacity
                             onPress={() => navigation.dispatch(popAction)}
-                            style={{ borderWidth: 1, borderRadius: 10, padding: 10, width: '40%', alignItems: 'center', backgroundColor: 'rgb(0,255,153)' }}>
-                            <Text style={styles.textV1}>DONE</Text>
+                            style={{
+                                borderWidth: 0, borderRadius: 10, padding: 10, width: '40%', alignItems: 'center', backgroundColor: '#27aaff', shadowColor: 'black',
+                                shadowRadius: 5,
+                                elevation: 5,
+                            }}>
+                            <Text style={[styles.textV1, { color: 'white' }]}>DONE</Text>
                         </TouchableOpacity>)}
 
 
@@ -93,7 +121,11 @@ const Playground = ({ navigation, route }) => {
                 data={questions}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
-                    <View style={{ marginHorizontal: 20, marginVertical: 5, borderBottomWidth: 2 }}>
+                    <View style={{
+                        marginHorizontal: 10, padding: 10, borderRadius: 10, marginVertical: 5, borderBottomWidth: 0, shadowColor: 'black',
+                        shadowRadius: 5,
+                        elevation: 5, backgroundColor: 'white'
+                    }}>
                         <View>
                             <Text style={styles.textV2}>{index + 1}. {item.question}</Text>
                         </View>
@@ -164,9 +196,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginHorizontal: 10,
         backgroundColor: 'white',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        borderRadius: 10,
         padding: 20,
+        shadowColor: 'black',
+        shadowOpacity: 0.7,
+        shadowRadius: 5,
+        elevation: 5
     },
     containerV2: {
         backgroundColor: 'white',
@@ -191,15 +226,19 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     answer: {
-        borderWidth: 1,
+        borderWidth: 0,
         padding: 10,
         borderRadius: 10,
         flexDirection: 'row',
         marginTop: 10
+        , shadowColor: 'black',
+        shadowRadius: 5,
+        elevation: 1.5, backgroundColor: 'white',
+        shadowOpacity: 0.3,
     },
     answerCorrect: {
-        backgroundColor: 'rgb(0,255,153)',
-        borderWidth: 1,
+        backgroundColor: '#65dc41',
+        borderWidth: 0,
         padding: 10,
         borderRadius: 10,
         flexDirection: 'row',
@@ -207,7 +246,7 @@ const styles = StyleSheet.create({
     },
     answerWrong: {
         backgroundColor: 'rgb(255,51,51)',
-        borderWidth: 1,
+        borderWidth: 0,
         padding: 10,
         borderRadius: 10,
         flexDirection: 'row',
@@ -215,7 +254,7 @@ const styles = StyleSheet.create({
     },
     answerSelected: {
         backgroundColor: 'lightgrey',
-        borderWidth: 1,
+        borderWidth: 0,
         padding: 10,
         borderRadius: 10,
         flexDirection: 'row',

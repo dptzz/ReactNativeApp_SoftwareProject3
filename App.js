@@ -255,8 +255,12 @@ const App = () => {
                     {/* Manage chapter */}
                     <Stack.Screen name='ManageChapter' component={ManageChapter} 
                     options={{
-                      headerTitle: 'Manage Chapter',
+                      headerTitle: '',
                       headerTitleAlign: 'center',
+                      headerTransparent: true,
+                      headerStyle: {
+                        height: 70,
+                      }
                     }}/>
                     <Stack.Screen name='AddChapter' component={AddChapter} 
                     options={{
@@ -272,8 +276,12 @@ const App = () => {
                     {/* Manage questions */}
                     <Stack.Screen name='ManageQuestion' component={ManageQuestion} 
                     options={{
-                      headerTitle: 'Manage Question',
+                      headerTitle: '',
                       headerTitleAlign: 'center',
+                      headerTransparent: true,
+                      headerStyle: {
+                        height: 70,
+                      }
                     }}/>
                     <Stack.Screen name='AddQuestion' component={AddQuestion} 
                     options={{
@@ -293,8 +301,12 @@ const App = () => {
                   <Stack.Group>
                     <Stack.Screen name='ManageTeachers' component={ManageTeachers} 
                     options={{
-                      headerTitle: 'Manage Teacher',
+                      headerTitle: '',
                       headerTitleAlign: 'center',
+                      headerTransparent: true,
+                      headerStyle: {
+                        height: 70,
+                      }
                     }}/>
                     <Stack.Screen name='EditTeacher' component={EditTeacher} 
                     options={{
@@ -307,8 +319,12 @@ const App = () => {
                   <Stack.Group>
                     <Stack.Screen name='ManageStudents' component={ManageStudents} 
                     options={{
-                      headerTitle: 'Manage Student',
+                      headerTitle: '',
                       headerTitleAlign: 'center',
+                      headerTransparent: true,
+                      headerStyle: {
+                        height: 70,
+                      }
                     }}/>
                     <Stack.Screen name='EditStudent' component={EditStudent} 
                     options={{
@@ -321,8 +337,12 @@ const App = () => {
                   <Stack.Group>
                     <Stack.Screen name='ManageRole' component={ManageRole} 
                     options={{
-                      headerTitle: 'Manage Role',
+                      headerTitle: '',
                       headerTitleAlign: 'center',
+                      headerTransparent: true,
+                      headerStyle: {
+                        height: 70,
+                      }
                     }}/>
                     <Stack.Screen name='SetRole' component={SetRole} 
                     options={{

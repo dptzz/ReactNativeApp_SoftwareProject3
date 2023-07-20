@@ -83,9 +83,9 @@ const ManageSubject = ({ navigation }) => {
     }
   }, [])
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 ,backgroundColor: 'white',}}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{margin: 5, color: 'black', fontSize: 20, fontWeight: 'bold' }}>Subjects</Text>
+        <Text style={{margin: 5, color: 'black', fontSize: 30, fontWeight: 'bold' }}>Subjects</Text>
         <View style={{ flex: 1}}>
           <FlatList
             data={listSubjects}
@@ -144,7 +144,7 @@ export default ManageSubject
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: 'white',
+    backgroundColor: 'white',
     padding: 10,
   },
   titleStyle: {

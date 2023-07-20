@@ -132,7 +132,7 @@ export default SetRole
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'white',
   },
   textInput: {
     borderWidth: 1,
@@ -152,15 +152,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingTop: 30,
     padding: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    borderRadius: 10,
+    shadowColor: 'black',
+    shadowRadius: 5,
+    elevation:5
   },
   view2: {
     backgroundColor: 'white',
     margin: 10,
     padding: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10
+    borderRadius: 10,
+    shadowColor: 'black',
+    shadowRadius: 5,
+    elevation:5
   },
   radioTouchableOpacicty: {
     flexShrink: 0,
@@ -185,8 +189,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
-    borderRadius: 10
-
+    borderRadius: 10,
+    shadowColor: 'black',
+    shadowRadius: 5,
+    elevation:5
   },
   nextbuttontext: {
     fontWeight: 'bold',

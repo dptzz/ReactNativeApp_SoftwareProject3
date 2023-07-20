@@ -73,9 +73,9 @@ const ManageChapter = ({ navigation, route }) => {
         }
     }, []);
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ flex: 1, margin: 10 }}>
-                <Text style={{margin: 5, color: 'black', fontSize: 25, fontWeight: 'bold' }}>Chapters</Text>
+        <View style={{ flex: 1 ,backgroundColor: 'white',}}>
+            <View style={{ flex: 1, margin: 10, marginTop: 40 }}>
+                <Text style={{margin: 5, color: 'black', fontSize: 30, fontWeight: 'bold', textAlign: 'center' }}>Chapters</Text>
                 <View style={{ flex: 1}}>
                     <FlatList
                         data={listChapters}

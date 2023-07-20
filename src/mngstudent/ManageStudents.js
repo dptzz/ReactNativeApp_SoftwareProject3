@@ -41,7 +41,7 @@ const ManageStudents = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{ color: 'black', margin: 5, fontSize: 25, fontWeight: 'bold' }}>Students</Text>
+        <Text style={{ color: 'black', margin: 5, fontSize: 30, fontWeight: 'bold', textAlign: 'center' }}>Students</Text>
         <View style={{ flex: 1 }}>
           <FlatList
             data={listStudents}

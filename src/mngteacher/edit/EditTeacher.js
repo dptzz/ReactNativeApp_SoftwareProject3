@@ -165,7 +165,7 @@ export default EditTeacher
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'white',
     },
     text: {
         color: 'black',
@@ -185,7 +185,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         paddingVertical: 30,
         padding: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        elevation: 5
     },
     nextbutton: {
         backgroundColor: 'rgb(0,255,153)',
@@ -193,7 +196,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 50,
-        borderRadius: 10
+        borderRadius: 10,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        elevation: 5
     },
     nextbuttontext: {
         fontWeight: 'bold',

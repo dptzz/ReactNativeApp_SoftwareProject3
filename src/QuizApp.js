@@ -95,7 +95,7 @@ const QuizApp = ({ navigation }) => {
               <View style={{ backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30, width: 180 }}>
                 <TouchableOpacity
                   style={styles.subject}
-                  onPress={() => navigation.navigate('Playground', { subject: item, userName: currentUser.firstName, userClass: currentUser.userClass })}>
+                  onPress={() => navigation.navigate('Playground', { subject: item, userName: currentUser.firstName, userClass: currentUser.class })}>
                   <Text style={styles.textV2}>{item}</Text>
                 </TouchableOpacity>
               </View>

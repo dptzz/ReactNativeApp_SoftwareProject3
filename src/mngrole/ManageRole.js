@@ -87,10 +87,10 @@ const ManageRole = ({ navigation }) => {
   }, [])
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: 'white', }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{ margin: 5, color: 'black', fontSize: 25, fontWeight: 'bold' }}>Users</Text>
-        <View style={{ flex: 1, borderWidth: 1}}>
+        <Text style={{ margin: 5, color: 'black', fontSize: 30, fontWeight: 'bold', textAlign: 'center' }}>Users</Text>
+        <View style={{ flex: 1, borderWidth: 0}}>
           <View style={{ flex: 1}}>
             <Text style={styles.itemTitle}>Students</Text>
             <FlatList
@@ -115,7 +115,7 @@ const ManageRole = ({ navigation }) => {
             />
           </View>
 
-          <View style={{ flex: 1, borderTopWidth: 1 }}>
+          <View style={{ flex: 1, borderTopWidth: 0 }}>
             <Text style={styles.itemTitle}>Teacher</Text>
             <FlatList
               data={listTeacher}
@@ -139,7 +139,7 @@ const ManageRole = ({ navigation }) => {
             />
           </View>
 
-          <View style={{ flex: 1, borderTopWidth: 1 }}>
+          <View style={{ flex: 1, borderTopWidth: 0 }}>
             <Text style={styles.itemTitle}>Admins</Text>
             <FlatList
               data={listAdmin}
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     borderBottomWidth: 1,
-    backgroundColor: '#AAAAAA',
+    backgroundColor: 'white',
     paddingLeft: 5,
     color: 'black'
   },

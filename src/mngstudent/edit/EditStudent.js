@@ -17,7 +17,7 @@ const EditStudent = ({ navigation, route }) => {
 
     // Go Back to manage screen
     const popAction = StackActions.pop(1);
-    
+
     const handleOptionSelect = (index, name) => {
         setSelecetOptions(index)
         setSClass(name)
@@ -109,9 +109,9 @@ const EditStudent = ({ navigation, route }) => {
                 />
                 <Text style={styles.text}>Class</Text>
                 <Text
-                    
-                    style={[styles.textInput,{ borderWidth: 1, paddingHorizontal: 10, paddingVertical: 15, backgroundColor: '#BFBFBF' }]}
-                    
+
+                    style={[styles.textInput, { borderWidth: 1, paddingHorizontal: 10, paddingVertical: 15, backgroundColor: '#BFBFBF' }]}
+
                 // disabled= {true}
 
                 >{sclass}</Text>
@@ -142,7 +142,7 @@ const EditStudent = ({ navigation, route }) => {
                 </View> */}
 
             </View>
-            <View style= {{flex:1,justifyContent: 'flex-end'}}>
+            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <TouchableOpacity
                     disabled={
                         !firstName || !lastName
@@ -153,7 +153,7 @@ const EditStudent = ({ navigation, route }) => {
                     ]}
                     onPress={() => {
                         handleSubmit(firstName, lastName)
-                        alert('User: '+email+' has been updated successfully!');
+                        alert('User: ' + email + ' has been updated successfully!');
                         navigation.dispatch(popAction)
                     }}
                 >
@@ -171,7 +171,7 @@ export default EditStudent
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'white',
     },
     text: {
         color: 'black',
@@ -191,7 +191,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         paddingVertical: 30,
         padding: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        elevation: 5,
     },
     nextbutton: {
         backgroundColor: 'rgb(0,255,153)',
@@ -199,7 +202,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 50,
-        borderRadius: 10
+        borderRadius: 10,
+        shadowColor: 'black',
+        shadowRadius: 5,
+        elevation: 5
     },
     nextbuttontext: {
         fontWeight: 'bold',
