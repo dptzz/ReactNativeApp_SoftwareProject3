@@ -50,6 +50,7 @@ import EditTeacher from './src/mngteacher/edit/EditTeacher';
 //Manage roles
 import ManageRole from './src/mngrole/ManageRole';
 import SetRole from './src/mngrole/setRole';
+import ViewClass from './src/viewClass/ViewClass';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -127,7 +128,7 @@ const TeacherHome = ({ route }) => {
 
         }}
       />
-      <Tab.Screen name="ManageClass" component={ManageClass}
+      <Tab.Screen name="ViewClass" component={ViewClass} initialParams={{ subject: csubject }}
         options={{
           title: 'Classes',
 
@@ -276,6 +277,7 @@ const App = () => {
                     headerTitle: 'Edit Question',
                     headerTitleAlign: 'center',
                   }} />
+                
               </Stack.Navigator>
 
             ) : (
