@@ -54,33 +54,33 @@ const EditClass1 = ({ navigation, route }) => {
       return;
     }
     setIsClassExists(false)
-    
-    
+
+
   }
   useEffect(() => {
     getTeacher();
     getClass();
-    
+
   }, [])
 
   useEffect(() => {
     //checkNameExists(className);
-    
-    
+
+
   })
   return (
-    <View style={{ flex: 1,backgroundColor: 'white' }}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={{ flex: 1, margin: 10 }}>
         {/* <Text>{className},{teacher}</Text> */}
-        <Text style={{fontSize: 25, fontWeight: 'bold' ,color: 'black'}}>Class Name</Text>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black' }}>Class Name</Text>
         <TextInput
           placeholder='Class Name'
-          style={{margin: 5, borderWidth: 1, padding: 10, fontSize: 24, borderRadius: 15}}
+          style={{ margin: 5, borderWidth: 1, padding: 10, fontSize: 24, borderRadius: 15 }}
           onChangeText={setClassName}
           value={className}
         />
-        <Text style={{fontSize: 25, fontWeight: 'bold' ,color: 'black'}}>Teacher</Text>
-        <View style={{ flex: 1}}>
+        <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black' }}>Teacher</Text>
+        <View style={{ flex: 1 }}>
           <FlatList
             data={listTeacher}
             renderItem={({ item, index }) => (
@@ -112,11 +112,11 @@ const EditClass1 = ({ navigation, route }) => {
           onPress={() => {
             // checkNameExists(className);
             // if(isClassExists) {
-              navigation.navigate('EditClass2', { cclassName: `${name}`,uclassName: `${className}`, teacherName: `${teacher}` })
+            navigation.navigate('EditClass2', { cclassName: `${name}`, uclassName: `${className}`, teacherName: `${teacher}` })
             // }else {
             //   alert(`There is already a class named ${className}`)
             // }
-            
+
           }}
         >
           <Text style={styles.nextbuttontext}>Next</Text>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     backgroundColor: 'white'
   },
-  itemname:{
+  itemname: {
     fontSize: 24,
     color: 'black'
   },
@@ -148,11 +148,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#949494',
   },
   nextbutton: {
-    padding: 10,
-    borderWidth: 0,
-    backgroundColor: 'lightgreen',
+    backgroundColor: 'rgb(0,255,153)',
+    margin: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-
+    height: 50,
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
   },
   nextbuttontext: {
     fontWeight: 'bold',
@@ -162,9 +166,10 @@ const styles = StyleSheet.create({
   nextbuttonDisabled: {
     padding: 10,
     borderWidth: 0,
-    backgroundColor: 'red',
+    backgroundColor: 'rgb(255,51,51)',
     alignItems: 'center',
 
-  }
+  },
+
 
 })

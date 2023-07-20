@@ -181,7 +181,7 @@ const AddQuestion = ({ navigation, route }) => {
 
 
             </ScrollView>
-            <View style={{backgroundColor: 'red'}}>
+            <View>
                 <TouchableOpacity
                     disabled={
                         !questionTitle || !option1 || !option2 || !option3 || !option4 || !difficulty || !correctOption

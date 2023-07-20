@@ -131,11 +131,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#949494',
   },
   nextbutton: {
-    padding: 10,
-    borderWidth: 0,
-    backgroundColor: 'lightgreen',
+    backgroundColor: 'rgb(0,255,153)',
+    margin: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-
+    height: 50,
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
   },
   nextbuttontext: {
     fontWeight: 'bold',
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
   nextbuttonDisabled: {
     padding: 10,
     borderWidth: 0,
-    backgroundColor: 'red',
+    backgroundColor: 'rgb(255,51,51)',
     alignItems: 'center',
 
   }
