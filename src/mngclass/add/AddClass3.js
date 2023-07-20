@@ -12,7 +12,7 @@ const AddClass3 = ({ navigation, route }) => {
     const { className, teacherName, students } = route.params
 
     const popAction = StackActions.pop(3);
-      
+
 
     const handleMultiSelect = (index, name) => {
         if (selecetedOptions[index] === name) {
@@ -33,7 +33,7 @@ const AddClass3 = ({ navigation, route }) => {
     }
 
     const handleSubmit = async (name, students, subjects, teacher) => {
-        
+
 
         await firebase.firestore().collection('class')
             .doc()
@@ -43,23 +43,23 @@ const AddClass3 = ({ navigation, route }) => {
                 subjects,
                 teacher,
             })
-            .catch((err) => {alert(err.message)})
+            .catch((err) => { alert(err.message) })
         const db = firebase.firestore()
         const studentRef = db.collection('users')
-        
+
         for (let i = 0; i < students.length; i++) {
             let docID = studentRef.where('email', '==', students[i]).get()
                 .then((snapshot) => {
                     snapshot.forEach((doc) => {
                         docID = doc.id
                         db.collection('users').doc(docID).update({
-                            
+
                             class: name,
                         })
                     })
                 })
         }
-         
+
         console.log('done')
     }
 
@@ -81,8 +81,8 @@ const AddClass3 = ({ navigation, route }) => {
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, margin: 10 }}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Subjects</Text>
-                <View style={{ flex: 1, borderWidth: 1 }}>
+                <Text style={{ margin: 5, color: 'black', fontSize: 20, fontWeight: 'bold' }}>Subjects</Text>
+                <View style={{ flex: 1 }}>
                     <FlatList
                         data={listSubject}
                         renderItem={({ item, index }) => (
@@ -105,19 +105,19 @@ const AddClass3 = ({ navigation, route }) => {
 
             </View>
             <View>
-                <TouchableOpacity 
+                <TouchableOpacity
                     disabled={!(Object.keys(selecetedOptions).length > 0)}
-                style={[
-                    styles.nextbutton,
-                    !(Object.keys(selecetedOptions).length > 0) && styles.nextbuttonDisabled
-                ]
-                }
-                onPress={() => {
-                    handleSubmit(className, students, Object.values(selecetedOptions), teacherName)
-                    navigation.dispatch(popAction)
-                    alert('Class ' + className+' has been added to database')
-                }
-                }
+                    style={[
+                        styles.nextbutton,
+                        !(Object.keys(selecetedOptions).length > 0) && styles.nextbuttonDisabled
+                    ]
+                    }
+                    onPress={() => {
+                        handleSubmit(className, students, Object.values(selecetedOptions), teacherName)
+                        navigation.dispatch(popAction)
+                        alert('Class ' + className + ' has been added to database')
+                    }
+                    }
                 >
                     <Text style={styles.nextbuttontext}>Submit</Text>
                 </TouchableOpacity>
@@ -131,12 +131,18 @@ export default AddClass3
 
 const styles = StyleSheet.create({
     item: {
+        margin: 5,
         padding: 10,
-        borderBottomWidth: 1
+        borderRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
+        backgroundColor: 'white'
     },
-    itemname:{
+    itemname: {
         fontSize: 24,
-      },
+        color: 'black'
+    },
     selectedOptions: {
         backgroundColor: '#949494',
     },

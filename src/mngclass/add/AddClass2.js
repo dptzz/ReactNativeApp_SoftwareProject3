@@ -42,13 +42,13 @@ const AddClass2 = ({ navigation, route }) => {
     }
     useEffect(() => {
         getStudents();
-        
+
     }, [])
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1,backgroundColor: 'white' }}>
             <View style={{ flex: 1, margin: 10 }}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Students</Text>
-                <View style={{ flex: 1, borderWidth: 1 }}>
+                <Text style={{ margin: 5, color: 'black', fontSize: 20, fontWeight: 'bold' }}>Students</Text>
+                <View style={{ flex: 1 }}>
                     <FlatList
                         data={listStudent}
                         renderItem={({ item, index }) => (
@@ -71,15 +71,15 @@ const AddClass2 = ({ navigation, route }) => {
 
             </View>
             <View>
-                <TouchableOpacity 
-                style={[
-                    styles.nextbutton,
-                    !(Object.keys(selecetedOptions).length > 0) && styles.nextbuttonDisabled
-                ]}
+                <TouchableOpacity
+                    style={[
+                        styles.nextbutton,
+                        !(Object.keys(selecetedOptions).length > 0) && styles.nextbuttonDisabled
+                    ]}
                     disabled={!(Object.keys(selecetedOptions).length > 0)}
                     onPress={() => {
                         navigation.navigate('AddClass3', { className: `${className}`, teacherName: `${teacherName}`, students: Object.values(selecetedOptions) })
-                        
+
                     }}
                 >
                     <Text style={styles.nextbuttontext}>Next</Text>
@@ -94,12 +94,18 @@ export default AddClass2
 
 const styles = StyleSheet.create({
     item: {
+        margin: 5,
         padding: 10,
-        borderBottomWidth: 1
+        borderRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
+        backgroundColor: 'white'
     },
-    itemname:{
+    itemname: {
         fontSize: 24,
-      },
+        color: 'black'
+    },
     selectedOptions: {
         backgroundColor: '#949494',
     },
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         backgroundColor: 'red',
         alignItems: 'center',
-    
+
     }
 
 })

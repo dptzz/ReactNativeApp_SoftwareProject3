@@ -57,8 +57,8 @@ const ManageRole = ({ navigation }) => {
   }, [])
   useEffect(() => {
     const db = firebase.firestore()
-    const studentRef = db.collection('users').where('role', '==',0);
-    const unsubscribe =  studentRef.onSnapshot((snapshot) => {
+    const studentRef = db.collection('users').where('role', '==', 0);
+    const unsubscribe = studentRef.onSnapshot((snapshot) => {
       setlistStudents(snapshot.docs.map(doc => doc.data()));
     })
     return () => {
@@ -67,8 +67,8 @@ const ManageRole = ({ navigation }) => {
   }, [])
   useEffect(() => {
     const db = firebase.firestore()
-    const teacherRef = db.collection('users').where('role', '==',1);
-    const unsubscribe =  teacherRef.onSnapshot((snapshot) => {
+    const teacherRef = db.collection('users').where('role', '==', 1);
+    const unsubscribe = teacherRef.onSnapshot((snapshot) => {
       setListTeacher(snapshot.docs.map(doc => doc.data()));
     })
     return () => {
@@ -77,8 +77,8 @@ const ManageRole = ({ navigation }) => {
   }, [])
   useEffect(() => {
     const db = firebase.firestore()
-    const adminRef = db.collection('users').where('role', '==',2);
-    const unsubscribe =  adminRef.onSnapshot((snapshot) => {
+    const adminRef = db.collection('users').where('role', '==', 2);
+    const unsubscribe = adminRef.onSnapshot((snapshot) => {
       setListAdmin(snapshot.docs.map(doc => doc.data()));
     })
     return () => {
@@ -89,9 +89,9 @@ const ManageRole = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Users</Text>
-        <View style={{ flex: 1, borderWidth: 1 }}>
-          <View style={{ flex: 1, }}>
+        <Text style={{ margin: 5, color: 'black', fontSize: 25, fontWeight: 'bold' }}>Users</Text>
+        <View style={{ flex: 1, borderWidth: 1}}>
+          <View style={{ flex: 1}}>
             <Text style={styles.itemTitle}>Students</Text>
             <FlatList
               data={listStudents}
@@ -115,7 +115,7 @@ const ManageRole = ({ navigation }) => {
             />
           </View>
 
-          <View style={{ flex: 1, borderTopWidth:1}}>
+          <View style={{ flex: 1, borderTopWidth: 1 }}>
             <Text style={styles.itemTitle}>Teacher</Text>
             <FlatList
               data={listTeacher}
@@ -139,7 +139,7 @@ const ManageRole = ({ navigation }) => {
             />
           </View>
 
-          <View style={{ flex: 1 , borderTopWidth:1}}>
+          <View style={{ flex: 1, borderTopWidth: 1 }}>
             <Text style={styles.itemTitle}>Admins</Text>
             <FlatList
               data={listAdmin}
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //backgroundColor: 'white',
     padding: 10,
-    
+
   },
   titleStyle: {
     fontSize: 28,
@@ -208,8 +208,13 @@ const styles = StyleSheet.create({
     //backgroundColor:'black'
   },
   item: {
+    margin: 5,
     padding: 10,
-    borderBottomWidth: 1,
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white',
     flexDirection: 'row',
 
   },
@@ -219,11 +224,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     backgroundColor: '#AAAAAA',
     paddingLeft: 5,
+    color: 'black'
   },
 
   itemname: {
     flexGrow: 1,
-    fontSize: 24
+    fontSize: 24,
+    color: 'black'
   },
   itemTouchableOpacicty: {
     flexShrink: 0,

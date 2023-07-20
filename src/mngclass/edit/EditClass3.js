@@ -147,10 +147,10 @@ const EditClass3 = ({ navigation, route }) => {
     console.log(uclassName, cclassName, teacherName, students, selectedSubjects, classID)
   }, [selectedSubjects.length]);
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1,backgroundColor: 'white' }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Subjects</Text>
-        <View style={{ flex: 1, borderWidth: 1 }}>
+        <Text style={{margin: 5, color: 'black', fontSize: 25, fontWeight: 'bold' }}>Subjects</Text>
+        <View style={{ flex: 1}}>
           <FlatList
             data={listSubject}
             renderItem={({ item, index }) => (
@@ -203,8 +203,13 @@ export default EditClass3
 
 const styles = StyleSheet.create({
   item: {
+    margin: 5,
     padding: 10,
-    borderBottomWidth: 1
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white'
   },
   itemname: {
     fontSize: 24

@@ -74,16 +74,16 @@ const AddChapter = ({ navigation, route }) => {
 
     })
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={{ flex: 1, margin: 10 }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Chapter title</Text>
+                <Text style={{ color: 'black', margin: 5, fontSize: 25, fontWeight: 'bold' }}>Chapter title</Text>
                 <TextInput
                     placeholder='Chapter Name'
-                    style={{ borderWidth: 1, padding: 10, fontSize: 24 }}
+                    style={{margin: 5, borderWidth: 1, padding: 10, fontSize: 24, borderRadius: 15 }}
                     onChangeText={setChapterName}
                 />
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Subjects</Text>
-                <View style={{ flex: 1, borderWidth: 1 }}>
+                <Text style={{ color: 'black', margin: 5, fontSize: 25, fontWeight: 'bold' }}>Subjects</Text>
+                <View style={{ flex: 1 }}>
                     <FlatList
 
                         data={listSubject}
@@ -140,11 +140,17 @@ export default AddChapter
 
 const styles = StyleSheet.create({
     item: {
+        margin: 5,
         padding: 10,
-        borderBottomWidth: 1
+        borderRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
+        backgroundColor: 'white',
     },
     itemname: {
         fontSize: 24,
+        color: 'black'
     },
     selectedOptions: {
         backgroundColor: '#949494',

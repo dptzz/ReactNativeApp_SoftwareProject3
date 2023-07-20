@@ -4,8 +4,8 @@ import { firebase } from '../../FirebaseConfig'
 import { StackActions } from '@react-navigation/native'
 
 const pushAction = (email) => StackActions.push('EditStudent',
- {email: email})
- 
+  { email: email })
+
 
 const ManageStudents = ({ navigation }) => {
   const [listStudents, setlistStudents] = useState([])
@@ -13,13 +13,13 @@ const ManageStudents = ({ navigation }) => {
   const getStudents = async () => {
     const db = firebase.firestore()
     const studentRef = db.collection('users');
-    const snapshot = await studentRef.where('role','==',0).get();
+    const snapshot = await studentRef.where('role', '==', 0).get();
     if (snapshot.empty) {
       console.log('No matching documents...');
       return;
     }
     const allStudent = snapshot.docs.map(doc => doc.data());
-    
+
     setlistStudents(allStudent)
   }
 
@@ -30,8 +30,8 @@ const ManageStudents = ({ navigation }) => {
   }, [])
   useEffect(() => {
     const db = firebase.firestore()
-    const studentRef = db.collection('users').where('role', '==',0);
-    const unsubscribe =  studentRef.onSnapshot((snapshot) => {
+    const studentRef = db.collection('users').where('role', '==', 0);
+    const unsubscribe = studentRef.onSnapshot((snapshot) => {
       setlistStudents(snapshot.docs.map(doc => doc.data()));
     })
     return () => {
@@ -39,10 +39,10 @@ const ManageStudents = ({ navigation }) => {
     }
   }, [])
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Students</Text>
-        <View style={{ flex: 1, borderWidth: 1 }}>
+        <Text style={{ color: 'black', margin: 5, fontSize: 25, fontWeight: 'bold' }}>Students</Text>
+        <View style={{ flex: 1 }}>
           <FlatList
             data={listStudents}
             renderItem={({ item, index }) => (
@@ -54,7 +54,7 @@ const ManageStudents = ({ navigation }) => {
                 <TouchableOpacity
                   style={styles.itemTouchableOpacicty}
                   onPress={() => navigation.dispatch(pushAction(item.email))}
-                  >
+                >
                   <Image source={require('../../assets/icon/edit.png')}
                     style={styles.itemTouchableOpacictyIcon} />
 
@@ -73,7 +73,7 @@ const ManageStudents = ({ navigation }) => {
         </View>
 
       </View>
-      
+
     </View>
 
   )
@@ -114,14 +114,20 @@ const styles = StyleSheet.create({
     //backgroundColor:'black'
   },
   item: {
+    margin: 5,
     padding: 10,
-    borderBottomWidth: 1,
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white',
     flexDirection: 'row',
 
   },
   itemname: {
     flexGrow: 1,
-    fontSize: 24
+    fontSize: 24,
+    color: 'black'
   },
   itemTouchableOpacicty: {
     flexShrink: 0,

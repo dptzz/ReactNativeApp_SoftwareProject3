@@ -75,8 +75,8 @@ const ManageChapter = ({ navigation, route }) => {
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, margin: 10 }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Chapters</Text>
-                <View style={{ flex: 1, borderWidth: 1 }}>
+                <Text style={{margin: 5, color: 'black', fontSize: 25, fontWeight: 'bold' }}>Chapters</Text>
+                <View style={{ flex: 1}}>
                     <FlatList
                         data={listChapters}
                         renderItem={({ item, index }) => (
@@ -115,10 +115,9 @@ const ManageChapter = ({ navigation, route }) => {
                 <Image
                     //We are making FAB using TouchableOpacity with an image
                     //We are using online image here
-                    source={{
-                        uri:
-                            'https://freesvg.org/img/1430954247.png',
-                    }}
+                    source={
+                        require('../../assets/icon/add.png')
+                      }
                     //You can use you project image Example below
                     //source={require('./images/float-add-icon.png')}
                     style={styles.floatingButtonStyle}
@@ -164,14 +163,19 @@ const styles = StyleSheet.create({
         //backgroundColor:'black'
     },
     item: {
+        margin: 5,
         padding: 10,
-        borderBottomWidth: 1,
+        borderRadius: 10,
+        shadowColor: '#000000',
+        shadowRadius: 5,
+        elevation: 5,
+        backgroundColor: 'white',
         flexDirection: 'row',
-
     },
     itemname: {
         flexGrow: 1,
-        fontSize: 24
+        fontSize: 24,
+        color: 'black'
     },
     itemTouchableOpacicty: {
         flexShrink: 0,

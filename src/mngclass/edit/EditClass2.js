@@ -73,10 +73,10 @@ const EditClass2 = ({ navigation, route }) => {
     // console.log(selectedStudents) //2
   })
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1,backgroundColor: 'white' }}>
       <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Students</Text>
-        <View style={{ flex: 1, borderWidth: 1 }}>
+        <Text style={{margin: 5, color: 'black', fontSize: 25, fontWeight: 'bold' }}>Students</Text>
+        <View style={{ flex: 1}}>
           <FlatList
 
             data={listStudent}
@@ -128,8 +128,13 @@ export default EditClass2
 
 const styles = StyleSheet.create({
   item: {
+    margin: 5,
     padding: 10,
-    borderBottomWidth: 1
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white'
   },
   itemname: {
     fontSize: 24,

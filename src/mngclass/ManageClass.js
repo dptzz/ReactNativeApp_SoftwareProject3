@@ -80,10 +80,10 @@ const ManageClass = ({ navigation }) => {
     }
   }, [])
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, margin: 10 }}>
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Classes</Text>
-        <View style={{ flex: 1, borderWidth: 1 }}>
+    <View style={{ flex: 1, backgroundColor: 'white'}}>
+      <View style={{ flex: 1, padding: 10 }}>
+        <Text style={{margin: 5, fontSize: 30, fontWeight: 'bold',color: 'black'}}>Classes</Text>
+        <View style={{ flex: 1}}>
           <FlatList
             data={listClass}
             renderItem={({ item, index }) => (
@@ -121,10 +121,9 @@ const ManageClass = ({ navigation }) => {
         <Image
           //We are making FAB using TouchableOpacity with an image
           //We are using online image here
-          source={{
-            uri:
-              'https://freesvg.org/img/1430954247.png',
-          }}
+          source={
+            require('../../assets/icon/add.png')
+          }
           //You can use you project image Example below
           //source={require('./images/float-add-icon.png')}
           style={styles.floatingButtonStyle}
@@ -162,22 +161,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     right: 20,
     bottom: 20,
+    borderRadius: 50,
+    shadowColor: '#000000',
+    shadowRadius: 10,
+    elevation: 5,
+    
+    backgroundColor: 'white'
   },
   floatingButtonStyle: {
     resizeMode: 'contain',
     width: 50,
     height: 50,
+    
     //backgroundColor:'black'
   },
   item: {
     padding: 10,
-    borderBottomWidth: 1,
     flexDirection: 'row',
-
+    borderRadius: 10,
+    margin: 5,
+    shadowColor: '#000000',
+    shadowRadius: 5,
+    elevation: 5,
+    backgroundColor: 'white'
   },
   itemname: {
     flexGrow: 1,
-    fontSize: 24
+    fontSize: 24,
+    color: 'black'
   },
   itemTouchableOpacicty: {
     flexShrink: 0,
