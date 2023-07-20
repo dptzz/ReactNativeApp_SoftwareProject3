@@ -3,7 +3,7 @@ import React from 'react'
 
 const UsersTab = ({ navigation }) => {
     return (
-        <View style={{ flex: 1}}>
+        <View style={{ flex: 1, backgroundColor: 'white'}}>
             <Text style={{margin: 15, color: 'black', fontSize: 25, fontWeight: 'bold'}}>User</Text>
             <Text style={{fontSize: 0 }} />
             <TouchableOpacity style={styles.item} onPress={()=> navigation.navigate('ManageTeachers') }>

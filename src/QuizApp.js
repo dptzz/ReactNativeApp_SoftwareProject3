@@ -92,7 +92,7 @@ const QuizApp = ({ navigation }) => {
           alignItems={'center'}
           renderItem={({ item, index }) => (
             <View style={styles.subjectsView}>
-              <View style={{ backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30, width: 180 }}>
+              <View style={{ backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30, width:'95%'}}>
                 <TouchableOpacity
                   style={styles.subject}
                   onPress={() => navigation.navigate('Playground', { subject: item, userName: currentUser.firstName, userClass: currentUser.class })}>
@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000000',
     shadowRadius: 5,
     elevation: 5,
+    width: '50%'
   },
   subject: {
     marginTop: 3,

@@ -53,7 +53,21 @@ const EditSubject = ({ navigation, route }) => {
                 })
             })
             .catch((err) => { console.log(err.message) })
-
+        let classID = db.collection('class').where('subjects', 'array-contains', name).get()
+            .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    classID = doc.id;
+                    db.collection('class').doc(classID).update({
+                        subjects: firebase.firestore.FieldValue.arrayUnion(subjectName)
+                    })
+                        .catch((error) => { console.log(error.message) })
+                    db.collection('class').doc(classID).update({
+                        subjects: firebase.firestore.FieldValue.arrayRemove(name)
+                    })
+                        .catch((error) => { console.log(error.message) })
+                })
+            })
+            .catch((err) => { console.log(err.message) })
         console.log('done')
     }
 
