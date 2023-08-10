@@ -256,7 +256,8 @@ const App = () => {
                   options={{
                     headerTitle: 'Edit Chapter',
                     headerTitleAlign: 'center',
-                  }} />
+                  }}
+                  initialParams={{ subject: userRole.subject }} />
                 <Stack.Screen name='ManageQuestion' component={ManageQuestion}
                   options={{
                     headerTitle: '',
@@ -277,7 +278,7 @@ const App = () => {
                     headerTitle: 'Edit Question',
                     headerTitleAlign: 'center',
                   }} />
-                
+
               </Stack.Navigator>
 
             ) : (

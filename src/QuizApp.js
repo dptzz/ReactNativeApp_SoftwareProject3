@@ -1,5 +1,5 @@
-import { TouchableOpacity, StyleSheet, Text, View, FlatList, Image } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { TouchableOpacity, StyleSheet, Text, View, FlatList, Image, ScrollView, RefreshControl } from 'react-native'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { firebase } from '../FirebaseConfig'
@@ -7,7 +7,16 @@ import { firebase } from '../FirebaseConfig'
 const QuizApp = ({ navigation }) => {
   const [currentUser, setCurrentUser] = useState({})
   const [subjects, setSubjects] = useState([])
+  const [refreshing, setRefreshing] = useState(false);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    getCurrentUser()
+    getSubject()
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   const getSubject = async () => {
     const db = firebase.firestore()
@@ -17,6 +26,7 @@ const QuizApp = ({ navigation }) => {
       const snapshot = await classRef.where('name', 'in', [currentUser["class"], ""]).get()
       if (snapshot.empty) {
         console.log('No matching documents...');
+        setSubjects([])
         return;
       }
       const thisUserClass = snapshot.docs.map(doc => doc.data())
@@ -46,6 +56,7 @@ const QuizApp = ({ navigation }) => {
 
   }, [currentUser])
 
+
   // useEffect(() => {
   //   const db = firebase.firestore()
   //   const classRef = db.collection('class').where('name', '==', currentUser.class)
@@ -60,20 +71,25 @@ const QuizApp = ({ navigation }) => {
   // }, [])
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       <View style={styles.containerV1}>
         <View style={styles.viewV1}>
-          <View style={{ paddingHorizontal: 15, paddingVertical: 5, borderWidth: 0, padding: 5, borderRadius: 15,shadowColor: '#000000',
-    shadowRadius: 5,
-    elevation: 5, justifyContent: 'center', backgroundColor: 'rgb(101,220,65)' }}>
+          <View style={{
+            paddingHorizontal: 15, paddingVertical: 5, borderWidth: 0, padding: 5, borderRadius: 15, shadowColor: '#000000',
+            shadowRadius: 5,
+            elevation: 5, justifyContent: 'center', backgroundColor: 'rgb(101,220,65)'
+          }}>
             <Text style={styles.textV1}>Name: {currentUser.firstName}</Text>
             <Text style={styles.textV1}>Class: {currentUser.class}</Text>
           </View>
           <View style={{ padding: 5, borderRadius: 10, justifyContent: 'center' }}>
             <TouchableOpacity
-              style={{shadowColor: '#000000',
-              shadowRadius: 5,
-              elevation: 5,}}
+              style={{
+                shadowColor: '#000000',
+                shadowRadius: 5,
+                elevation: 5,
+              }}
               onPress={() => firebase.auth().signOut()}>
               <Icon name="sign-out-alt" size={28} />
             </TouchableOpacity>
@@ -87,12 +103,13 @@ const QuizApp = ({ navigation }) => {
       <View style={styles.containerV2}>
 
         <FlatList
+
           data={subjects}
           numColumns={2}
           alignItems={'center'}
           renderItem={({ item, index }) => (
             <View style={styles.subjectsView}>
-              <View style={{ backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30, width:'95%'}}>
+              <View style={{ backgroundColor: 'white', borderWidth: 1, margin: 10, borderRadius: 30, width: '95%' }}>
                 <TouchableOpacity
                   style={styles.subject}
                   onPress={() => navigation.navigate('Playground', { subject: item, userName: currentUser.firstName, userClass: currentUser.class })}>
@@ -113,7 +130,7 @@ const QuizApp = ({ navigation }) => {
         </TouchableOpacity>
       </View> */}
 
-    </View>
+    </ScrollView>
   )
 }
 
@@ -181,7 +198,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    
+
   },
   text: {
     color: 'black',
