@@ -64,7 +64,7 @@ const Playground = ({ navigation, route }) => {
                         elevation: 5
                     }}>
                         <CountDown
-                            until={1800}
+                            until={150}
                             onFinish={() => {
                                 handleSubmit()
 

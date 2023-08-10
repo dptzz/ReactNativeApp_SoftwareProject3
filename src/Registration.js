@@ -7,11 +7,13 @@ import { firebase } from '../FirebaseConfig'
 const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [cPassword, setCPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
 
-  registerUser = async (email, password, firstName, lastName) => {
+  const registerUser = async (email, password, firstName, lastName) => {
     await firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(() => {
         firebase.auth().currentUser.sendEmailVerification({
@@ -22,6 +24,7 @@ const Registration = () => {
             alert('Verification email sent successfully')
           }).catch((error) => {
             alert(error.message)
+
           })
           .then(() => {
             firebase.firestore().collection('users')
@@ -35,12 +38,17 @@ const Registration = () => {
               })
               .catch((error) => {
                 alert(error.message)
+
               })
           })
           .catch((error) => {
             alert(error.message)
+
           })
+      }).catch((error) => {
+        alert(error.message)
       })
+
   }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -83,9 +91,32 @@ const Registration = () => {
             secureTextEntry={true}>
 
           </TextInput>
+          <TextInput
+            style={styles.textInput}
+            placeholder='Confirm Password'
+            onChangeText={(cPassword) => setCPassword(cPassword)}
+            autoCorrect={false}
+            autoCapitalize='none'
+            secureTextEntry={true}>
+
+          </TextInput>
 
           <TouchableOpacity
-            onPress={() => registerUser(email, password, firstName, lastName)}
+            onPress={() => {
+
+              if (lastName && firstName && email && password && cPassword) {
+                if (cPassword == password) {
+                  registerUser(email, password, firstName, lastName)
+                }
+                else {
+                  alert('Please check if your password is correct')
+                }
+              }
+              else {
+                alert('Please enter all fields')
+              }
+            }
+            }
             style={styles.getStarted}>
             <Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold', padding: 12 }}>
               Create

@@ -38,7 +38,7 @@ const EditChapter = ({ navigation, route }) => {
                 })
             })
             .catch((err) => { console.log(err.message) })
-        let questionID = db.collection('questions').where('subject', '==', subjectName).where('chapter', '==', cname).get()
+        let questionID = db.collection('questions').where('subject', '==', subject).where('chapter', '==', cname).get()
             .then((snapshot) => {
                 snapshot.forEach((doc) => {
                     questionID = doc.id
@@ -150,7 +150,7 @@ const EditChapter = ({ navigation, route }) => {
                         }
                     }}
                 >
-                    <Text style={styles.nextbuttontext}>Next</Text>
+                    <Text style={styles.nextbuttontext}>Submit</Text>
                 </TouchableOpacity>
             </View>
         </View>
